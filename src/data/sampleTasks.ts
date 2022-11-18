@@ -13,7 +13,7 @@ const sampleTasks: Task[] = [
 		"Irure minim qui exercitation do ipsum est. Culpa aliquip esse reprehenderit pariatur. Excepteur adipisicing id dolore magna aliquip labore consequat cillum duis non pariatur exercitation tempor ullamco. ",
 		{
 			date: "25-10-2022",
-			dateTime: "2022-10-28T12:00:00Z",
+			dateTime: "2022-10-26T12:00:00Z",
 			isRecurring: false,
 			timezone: "asia/riyadh",
 		},
@@ -41,7 +41,7 @@ const sampleTasks: Task[] = [
 		"Cillum sint laboris esse dolor labore nisi elit et labore nostrud laborum cupidatat.Amet sint nulla in esse eu laboris qui aute in nulla eiusmod eiusmod.",
 		{
 			date: "2022-09-02",
-			dateTime: "2022-08-25T12:00:00Z",
+			dateTime: "2022-10-26T12:00:00Z",
 			isRecurring: false,
 			timezone: "asia/riyadh",
 		},

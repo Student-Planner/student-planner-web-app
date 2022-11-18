@@ -22,8 +22,11 @@ import { faAngleRight, faCalendarDay, faChevronLeft, faChevronRight } from "@for
 import Task from "../data/Task";
 import sampleTasks from '../data/sampleTasks';
 import CalendarDay from "./CalendarDay";
-
-
+import TaskItem from './TaskItem';
+import { styled, keyframes } from '@stitches/react';
+import { violet, blackA, mauve } from '@radix-ui/colors';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
 
 
 export default function CalendarMonth() {
@@ -53,6 +56,15 @@ export default function CalendarMonth() {
   function nextMonth() {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
+  }
+  function getPreviousMonth() {
+    const firstDayPreviousMonth = add(firstDayCurrentMonth, { months: -1 });
+    return firstDayPreviousMonth;
+  }
+
+  function getNextMonth() {
+    const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
+    return firstDayNextMonth;
   }
 
   // Filter for task of current day
@@ -127,20 +139,18 @@ export default function CalendarMonth() {
 
 
           {/* Events Portion */}
-          <section className="mt-12 md:mt-0 md:pl-14">
-            <h2 className="font-semibold text-gray-900">
+          <section className="mt-12 md:mt-0 md:pl-6">
+            <h2 className="font-semibold text-gray-400">
               Schedule for{" "}
               <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
                 {format(selectedDay, "MMM dd, yyy")}
               </time>
             </h2>
-            <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+            <ol className="flex flex-col mt-4  text-sm leading-6">
+
               {selectedDayEvents.length > 0 ? (
                 selectedDayEvents.map((event) => (
-                  <div
-                    key={event.Id}>
-                    {event.Content}
-                  </div>
+                  <TaskItem key={event.Id} task={event} />
                 ))
               ) : (
                 <p>No meetings for today.</p>
@@ -152,4 +162,5 @@ export default function CalendarMonth() {
     </div>
   );
 }
+
 

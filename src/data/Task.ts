@@ -17,7 +17,7 @@ export const TaskConverter: FirestoreDataConverter<Task> = {
 	toFirestore(task: WithFieldValue<Task>): DocumentData {
 		return {
 			id: task.Id,
-			content: task.Content,
+			content: task.Title,
 			description: task.Description,
 			due: task.Due,
 			isCompleted: task.IsCompleted,
@@ -50,7 +50,7 @@ export const TaskConverter: FirestoreDataConverter<Task> = {
 
 class Task {
 	private id: string;
-	private content: string;
+	private title: string;
 	private description: string;
 	private due: Due;
 	private isCompleted: boolean;
@@ -58,14 +58,14 @@ class Task {
 
 	public constructor(
 		id: string,
-		content: string,
+		title: string,
 		description: string,
 		due: Due,
 		isCompleted: boolean,
 		labels: string[]
 	) {
 		this.Id = id;
-		this.Content = content;
+		this.Title = title;
 		this.Description = description;
 		this.Due = due;
 		this.IsCompleted = isCompleted;
@@ -75,8 +75,8 @@ class Task {
 	public get Id(): string {
 		return this.id;
 	}
-	public get Content(): string {
-		return this.content;
+	public get Title(): string {
+		return this.title;
 	}
 	public get Description(): string {
 		return this.description;
@@ -94,8 +94,8 @@ class Task {
 	public set Id(id: string) {
 		this.id = id;
 	}
-	public set Content(content: string) {
-		this.content = content;
+	public set Title(content: string) {
+		this.title = content;
 	}
 	public set Description(description: string) {
 		this.description = description;

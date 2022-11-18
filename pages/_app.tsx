@@ -1,5 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import '../styles/globals.css'
+import { store } from '../src/store';
+import { Provider } from "react-redux";
+import '../styles/globals.scss'
 
 const darkTheme = createTheme({
   palette: {
@@ -10,7 +12,9 @@ const darkTheme = createTheme({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Component {...pageProps} />
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
   )
 }
 
