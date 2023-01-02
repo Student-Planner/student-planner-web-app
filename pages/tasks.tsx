@@ -1,20 +1,12 @@
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@radix-ui/react-accordion';
-import { Head } from 'next/document';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@radix-ui/react-accordion'
 import React from 'react'
 import styles from '../styles/Home.module.css'
 
 type Props = {}
 
-function tasks({ }: Props) {
+function Tasks({ }: Props) {
     return (
-
         <div className={styles.container}>
-            <Head>
-                <title>Home</title>
-                <meta name="Homepage" content="Main Stuff" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
             <main className={styles.main}>
                 <Accordion className="AccordionRoot" type="single" defaultValue="item-1" collapsible>
                     <AccordionItem className="AccordionItem" value="item-1">
@@ -25,7 +17,7 @@ function tasks({ }: Props) {
                     <AccordionItem className="AccordionItem" value="item-2">
                         <AccordionTrigger>Is it unstyled?</AccordionTrigger>
                         <AccordionContent>
-                            Yes. It's unstyled by default, giving you freedom over the look and feel.
+                            Yes. It&apos;s unstyled by default, giving you freedom over the look and feel.
                         </AccordionContent>
                     </AccordionItem>
 
@@ -47,4 +39,4 @@ function tasks({ }: Props) {
     )
 }
 
-export default tasks
+export default Tasks

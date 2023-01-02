@@ -1,4 +1,5 @@
 import React from 'react'
+import gsap from "gsap";
 const { useRef, useState, useEffect, createRef } = React
 
 type Props = {}
@@ -19,11 +20,11 @@ function magneticButton({ }: Props) {
         borderRadius = 0,
         ...props
     }) => {
-        const $root = useRef()
-        const $item = useRef()
-        const $hover = useRef()
-        const rootBound = useRef()
-        const itemBound = useRef()
+        const $root = useRef(null)
+        const $item = useRef(null)
+        const $hover = useRef(null)
+        const rootBound = useRef(null)
+        const itemBound = useRef(null)
         const diffBound = useRef({ x: 0, y: 0 })
 
         const handleMouseEnter = () => {
@@ -122,7 +123,7 @@ function magneticButton({ }: Props) {
                 scale={1.5}
                 tollerance={.8}
                 speed={0.5}
-                borderRadius='30px'
+                borderRadius={30}
                 onClick={() => {
                     console.log('click')
                 }}
@@ -135,7 +136,7 @@ function magneticButton({ }: Props) {
                 scale={2}
                 tollerance={.8}
                 speed={.3}
-                borderRadius='50%'
+                borderRadius={50}
                 onClick={() => {
                     console.log('click')
                 }}
@@ -149,7 +150,7 @@ function magneticButton({ }: Props) {
                 scale={2}
                 tollerance={.8}
                 speed={.3}
-                borderRadius='50%'
+                borderRadius={50}
                 onClick={() => {
                     console.log('click')
                 }}
@@ -159,7 +160,7 @@ function magneticButton({ }: Props) {
                     scale={4}
                     tollerance={1}
                     speed={.5}
-                    borderRadius='50%'
+                    borderRadius={50}
                     onClick={() => {
                         console.log('click')
                     }}
@@ -169,13 +170,6 @@ function magneticButton({ }: Props) {
             </MagneticButton>
         </div>
     )
-
-
-    /*--------------------
-    Render
-    --------------------*/
-    ReactDOM.render(<App />,
-        document.getElementById("root"))
 
 }
 

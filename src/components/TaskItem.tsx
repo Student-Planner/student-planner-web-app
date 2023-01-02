@@ -19,7 +19,7 @@ type Props = {
 {/* Checkbox button */ }
 function TaskItem({ task }: Props) {
     return (
-        <button className='rounded-lg ring-gray-600 ring-2 ring-solid hover:bg-gray-700 container w-full max-h-28 my-1 ' role="checkbox" type='button'>
+        <button className='rounded-lg ring-gray-600 ring-2 ring-solid hover:bg-gray-700 container w-full max-h-28 my-1 ' role="checkbox" type='button' aria-checked>
 
             {/* Task content */}
             <div className="pl-2">

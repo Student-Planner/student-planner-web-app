@@ -8,7 +8,7 @@ function Events({ }: Props) {
     return (
         <div>
             {/* Events Portion */}
-            <section className="mt-12 md:mt-0 md:pl-6" >
+            {/* <section className="mt-12 md:mt-0 md:pl-6" >
                 <h2 className="font-semibold text-gray-400">
                     Schedule for{" "}
                     <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
@@ -24,7 +24,7 @@ function Events({ }: Props) {
                         <p>No meetings for today.</p>
                     )}
                 </ol>
-            </section>
+            </section> */}
         </div>
     )
 }
