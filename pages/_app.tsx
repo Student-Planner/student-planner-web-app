@@ -1,13 +1,7 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { store } from '../src/store';
+import { store } from '../src/redux/store';
 import { Provider } from "react-redux";
 import '../styles/globals.scss'
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+import '../styles/navbar.scss'
 
 
 function MyApp({ Component, pageProps }) {

@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-// ...
+import { selectedDaySlice } from "./calendarSelectedDay";
 
 export const store = configureStore({
 	reducer: {
 		// posts: postsReducer,
 		// comments: commentsReducer,
 		// users: usersReducer,
+		selectedDayReducer: selectedDaySlice.reducer,
 	},
 });
 

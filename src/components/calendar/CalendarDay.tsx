@@ -1,42 +1,39 @@
 import React from 'react'
 import {
-    add,
-    eachDayOfInterval,
-    endOfMonth,
-    endOfWeek,
-    startOfWeek,
     format,
-    isSameDay,
-    parse,
-    parseISO,
-    startOfToday,
     getDay,
     isEqual,
     isSameMonth,
     isToday,
+    startOfToday,
 } from "date-fns";
-import { classNames } from '../utils/utils';
-import Task from '../data/Task';
+import { classNames } from '../../utils/utils';
+import Task from '../../data/Task';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectedDayValue, changeSelectedDay } from '../../redux/calendarSelectedDay';
 
 
 type Props = {
     day: Date;
     dayIndx: number;
-    setSelectedDay: CallableFunction;
-    selectedDay: Date;
     firstDayCurrentMonth: Date;
     dayEvents: Task[];
 }
 
 
-const CalendarDay = ({ day, dayIndx, setSelectedDay, selectedDay, firstDayCurrentMonth, dayEvents }: Props) => {
+const CalendarDay = ({ day, dayIndx, firstDayCurrentMonth, dayEvents }: Props) => {
+    const dispatch = useDispatch()
+    const today = startOfToday();
+    const selectedDay = useSelector(selectedDayValue)
+    const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
+
     return (
         <div
             key={day.toString()}
             className={classNames(
                 dayIndx === 0 &&
                 colStartClasses[getDay(day)],
-                "mt-2.5 px-auto"
+                "mt-[0.6rem] px-auto"
             )}>
             <button
                 type="button"
@@ -48,16 +45,16 @@ const CalendarDay = ({ day, dayIndx, setSelectedDay, selectedDay, firstDayCurren
                     !isEqual(day, selectedDay) &&
                     !isToday(day) &&
                     isSameMonth(day, firstDayCurrentMonth) &&
-                    "text-gray-400",
+                    "text-neutral-400",
 
                     // When Selected
                     isEqual(day, selectedDay) &&
                     !isToday(day) &&
-                    "bg-gray-600",
+                    "bg-neutral-600",
 
                     // On Hover
                     !isEqual(day, selectedDay) &&
-                    "hover:bg-gray-600",
+                    "hover:bg-neutral-700 hover:text-neutral-300",
                     // =========================
 
                     // == Today == 
@@ -65,7 +62,7 @@ const CalendarDay = ({ day, dayIndx, setSelectedDay, selectedDay, firstDayCurren
                     // When NOT Selected
                     !isEqual(day, selectedDay) &&
                     isToday(day) &&
-                    "text-red-500 hover:bg-gray-700",
+                    "text-red-500 hover:bg-neutral-700",
 
                     // When Selected
                     isEqual(day, selectedDay) &&
@@ -75,10 +72,10 @@ const CalendarDay = ({ day, dayIndx, setSelectedDay, selectedDay, firstDayCurren
 
                     // Bolden Selected Day & Today 
                     (isEqual(day, selectedDay) || isToday(day)) &&
-                    "font-semibold",
+                    "font-medium",
 
                     // Other common styles
-                    "mx-auto mb-1 flex h-11 w-11 items-center justify-center rounded-full transition duration-200"
+                    'mx-auto mb-1 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-150'
                 )}>
                 <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
@@ -87,12 +84,12 @@ const CalendarDay = ({ day, dayIndx, setSelectedDay, selectedDay, firstDayCurren
 
             <div className="flex flex-row mt-0.5 h-1.5 text-xs justify-center">
                 {dayEvents.map((event, eventIndex) => (
-                    <div
+                    eventIndex < 3 ? <div
                         key={eventIndex}
                         className={classNames(
                             eventIndex === 0 ?
                                 "" : "ml-1",
-                            "bg-red-600 h-1.5 w-1.5 rounded-full")}></div>
+                            "bg-red-600 h-1.5 w-1.5 rounded-full")}></div> : <></>
                 ))}
             </div>
             {/* <div className="w-1 h-1 mx-auto mt-1">

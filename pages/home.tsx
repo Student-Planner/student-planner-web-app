@@ -1,6 +1,6 @@
 import React from 'react'
-import Calendar from '../src/components/CalendarMonth';
-import Navbar from '../src/ui/Navbar';
+import Calendar from '../src/components/calendar/Calendar';
+import Navbar from '../src/components/Navbar';
 
 type Props = {}
 
@@ -9,6 +9,7 @@ function calendarTesting({ }: Props) {
         <div className=''>
             <Navbar />
             <Calendar />
+
         </div>
     )
 }

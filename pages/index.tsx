@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import CalendarModule from '../src/components/CalendarMonth';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../src/ui/Accordion';
+import CalendarModule from '../src/components/calendar/Calendar';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../src/components/Accordion';
 import { classNames } from '../src/utils/utils';
 
 export default function Home() {

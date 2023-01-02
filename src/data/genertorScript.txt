@@ -1,0 +1,20 @@
+[
+  {
+    
+	id: '{{objectId()}}',
+	title: '{{lorem(3, "words")}}',
+	description: '{{lorem(12, "words")}}',
+    due: {
+			date: '{{date(new Date(2022, 10, 1, 0, 0, 0), new Date(2022, 10, 30, 2), "dd-MM-YYYY")}}',
+			dateTime: '{{date(new Date(2022, 10, 1, 0, 0, 0), new Date(2022, 10, 30, 2), "YYYY-MM-ddThh:mm:ss")}}',
+			isRecurring: false,
+			timezone: "asia/riyadh",
+    },
+	isCompleted: '{{bool()}}',
+	labels:  [
+      '{{repeat(7)}}',
+      '{{lorem(1, "words")}}'
+    ]
+	
+  }
+]

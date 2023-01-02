@@ -63,11 +63,11 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.12.1", "@babel/runtime@^7.9.2":
-  version "7.20.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.0.tgz#824a9ef325ffde6f78056059db3168c08785e24a"
-  integrity sha512-NDYdls71fTXoU8TZHfbBWg7DiZfNzClcKui/+kyi6ppD2L1qnWW3VV6CjtaBXSUGGhiTWJ6ereOIkUvenif66Q==
+  version "7.20.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.6.tgz#facf4879bfed9b5326326273a64220f099b0fce3"
+  integrity sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==
   dependencies:
-    regenerator-runtime "^0.13.10"
+    regenerator-runtime "^0.13.11"
 
 "@babel/runtime@^7.13.10":
   version "7.20.1"
@@ -2601,11 +2601,6 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-redux-wrapper@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-8.0.0.tgz#588f2d89146c60c77d4a40c0af7e5282acfe4773"
-  integrity sha512-zKRdpvDeqNXQr1j5DUWwsB2fz6XpHR32iy2qJGItTKLsbLB9GvtxDL9b4mFCfhDvnzy5dw97UqMjWDpFY8h0zA==
-
 next@^12.3.1:
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/next/-/next-12.3.1.tgz#127b825ad2207faf869b33393ec8c75fe61e50f1"
@@ -2867,7 +2862,7 @@ postcss@8.4.14:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@^8.4.17, postcss@^8.4.18:
+postcss@^8.4.18:
   version "8.4.18"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.18.tgz#6d50046ea7d3d66a85e0e782074e7203bc7fbca2"
   integrity sha512-Wi8mWhncLJm11GATDaQKobXSNEYGUHeQLiQqDFG1qQ5UTDPTEvKw0Xt5NsTpktGTwLps3ByrWsBrG0rB8YQ9oA==
@@ -2982,11 +2977,6 @@ react-redux@^8.0.5:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
-react-ripples@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-ripples/-/react-ripples-2.2.1.tgz#bab529eb10e06f7e660561d97e2442a38b9f4687"
-  integrity sha512-TfLjgZICQlsYCN2iX4fdeZNjoDzhJVC7r+R3irqyaNvCtWezouS9j+sE+nwSk747irtV8RKRDHmwMmsNBOw8Qg==
-
 react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
@@ -3031,11 +3021,6 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-redux-thunk@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.4.1.tgz#0dd8042cf47868f4b29699941de03c9301a75714"
-  integrity sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==
-
 redux-thunk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.4.2.tgz#b9d05d11994b99f7a91ea223e8b04cf0afa5ef3b"
@@ -3052,6 +3037,11 @@ regenerator-runtime@^0.13.10, regenerator-runtime@^0.13.4:
   version "0.13.10"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
   integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
+
+regenerator-runtime@^0.13.11:
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
 regexp.prototype.flags@^1.4.1, regexp.prototype.flags@^1.4.3:
   version "1.4.3"
@@ -3315,10 +3305,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tailwindcss@^3.1.8:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.1.tgz#1bd828fff3172489962357f8d531c184080a6786"
-  integrity sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==
+tailwindcss@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.4.tgz#afe3477e7a19f3ceafb48e4b083e292ce0dc0250"
+  integrity sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==
   dependencies:
     arg "^5.0.2"
     chokidar "^3.5.3"
@@ -3334,7 +3324,7 @@ tailwindcss@^3.1.8:
     normalize-path "^3.0.0"
     object-hash "^3.0.0"
     picocolors "^1.0.0"
-    postcss "^8.4.17"
+    postcss "^8.4.18"
     postcss-import "^14.1.0"
     postcss-js "^4.0.0"
     postcss-load-config "^3.1.4"
