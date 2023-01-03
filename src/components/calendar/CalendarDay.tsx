@@ -7,10 +7,10 @@ import {
     isToday,
     startOfToday,
 } from "date-fns";
-import { classNames } from '../../utils/utils';
-import Task from '../../data/Task';
+import { classNames } from '@/utils/utils';
+import Task from '@/data/Task';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedDayValue, changeSelectedDay } from '../../redux/calendarSelectedDay';
+import { selectedDayValue, changeSelectedDay } from '@/redux/calendarSelectedDay';
 
 
 type Props = {

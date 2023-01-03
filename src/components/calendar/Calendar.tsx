@@ -12,12 +12,12 @@ import {
   startOfToday,
 } from "date-fns";
 import { faCalendarDay, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import sampleTasks from '../../data/sampleTasks';
+import sampleTasks from '@/data/sampleTasks';
 import CalendarDay from "./CalendarDay";
 import { CalendarHeaderButton } from './CalendaryHeaderButton';
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectedDayValue, changeSelectedDay } from "../../redux/calendarSelectedDay";
+import { selectedDayValue, changeSelectedDay } from "@/redux/calendarSelectedDay";
 
 export default function Calendar() {
   const dispatch = useDispatch()

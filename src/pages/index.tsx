@@ -1,5 +1,5 @@
-import Calendar from '../src/components/calendar/Calendar';
-import Navbar from '../src/components/Navbar';
+import Calendar from '@/components/calendar/Calendar';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   return (

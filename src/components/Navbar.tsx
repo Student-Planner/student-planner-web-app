@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import {
     faHouseUser,
     faCircleInfo,
@@ -19,7 +19,6 @@ type Props = {}
 function Navbar({ }: Props) {
     const [sideMenuOpen, setSideMenuOpen] = useState(false)
     const toggleSideMenu = () => setSideMenuOpen(!sideMenuOpen);
-
 
 
     return (

@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import sampleTasks from "../../../src/data/sampleTasks";
-import Task from "../../../src/data/Task";
+import sampleTasks from "@/data/sampleTasks";
+import Task from "@/data/Task";
 
 export default function handler(req, res) {
 	const tasks: Task[] = sampleTasks;

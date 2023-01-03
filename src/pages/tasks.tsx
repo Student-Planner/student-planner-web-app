@@ -1,10 +1,13 @@
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@radix-ui/react-accordion'
 import React from 'react'
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
+
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 type Props = {}
 
-function Tasks({ }: Props) {
+function Tasks({ }) {
     return (
         <div className={styles.container}>
             <main className={styles.main}>

@@ -1,5 +1,5 @@
-import Task, { Due } from "../data/Task";
 import sampleTasksJson from "./sampleTasks.json";
+import Task from "./Task";
 
 const sampleTasks: Task[] = [];
 

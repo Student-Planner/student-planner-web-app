@@ -1,7 +1,7 @@
-import { store } from '../src/redux/store';
+import { store } from '@/redux/store';
 import { Provider } from "react-redux";
-import '../styles/globals.scss'
-import '../styles/navbar.scss'
+import '@/styles/globals.scss'
+import '@/styles/navbar.scss'
 
 
 function MyApp({ Component, pageProps }) {
