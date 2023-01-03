@@ -14,17 +14,21 @@ datasource db {
 model User {
   id        String @id @default(uuid())
   email     String @unique
-  username  String
+  username  String @unique
   firstName String
   lastName  String
 }
 
 model Task {
-  id          String    @id @default(uuid())
+  id          String   @id @default(uuid())
   title       String
   description String?
-  due         DateTime?
-  isRecurring Boolean?  @default(false)
-  isCompleted Boolean   @default(false)
+  due         DateTime
+  created     DateTime @default(now())
+  updated     DateTime @updatedAt
+  isRecurring Boolean? @default(false)
+  isCompleted Boolean  @default(false)
   labels      String[]
+
+  @@index([title, description, labels])
 }

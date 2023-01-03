@@ -24,7 +24,9 @@
 		"**/*.tsx",
 		"tailwind.config.js",
 		"src/colors.ts",
-		"src/redux/rootReducer"
+		"src/redux/rootReducer",
+		"clear.js",
+		"test.js"
 	],
 	"exclude": ["node_modules"]
 }
