@@ -8,9 +8,9 @@ import {
     startOfToday,
 } from "date-fns";
 import { classNames } from '@/utils/utils';
-import Task from '@/data/Task';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectedDayValue, changeSelectedDay } from '@/redux/calendarSelectedDay';
+import { Task } from '@prisma/client';
 
 
 type Props = {
@@ -92,10 +92,11 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                 {dayEvents.map((event, eventIndex) => (
                     eventIndex < 3 ? <div
                         key={eventIndex}
+                        // TODO update color value (was bg-red-600)
                         className={classNames(
                             eventIndex === 0 ?
                                 "" : "ml-1",
-                            "bg-red-600 h-1.5 w-1.5 rounded-full")}></div> : <></>
+                            "bg-[", event.color, "]", "h-1.5 w-1.5 rounded-full")}></div> : <></>
                 ))}
             </div>
             {/* <div className="w-1 h-1 mx-auto mt-1">

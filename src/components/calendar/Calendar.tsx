@@ -64,18 +64,18 @@ export default function Calendar() {
   }
 
   // Filter for task of current day
-  const selectedDayEvents = sampleTasks.filter((evnet) =>
-    isSameDay(parseISO(evnet.Due.dateTime), selectedDay)
+  const selectedDayEvents = sampleTasks.filter((event) =>
+    isSameDay(event.due, selectedDay)
   );
 
-  const getDayEvents = (day: Date) => (sampleTasks.filter((evnet) =>
-    isSameDay(parseISO(evnet.Due.dateTime), day)
+  const getDayEvents = (day: Date) => (sampleTasks.filter((event) =>
+    isSameDay(event.due, day)
   ));
 
   return (
-    <div className="max-w-7xl max-h- mx-auto my-auto md:px-6 px-2 md:py-6 py-2 select-none lg:text-xl md:text-lg">
+    <div className="max-w-lg max-h- mx-auto my-auto md:px-6 px-2 md:py-6 py-2 select-none lg:text-xl md:text-lg">
       {/* Header */}
-      <div className="grid grid-cols-3 divide-x-8 divide-transparent mb-4">
+      <div className="grid grid-cols-1 divide-x-8 divide-transparent mb-4">
         <div className=""></div>
         <div>
           {/* Control Header */}
@@ -84,6 +84,7 @@ export default function Calendar() {
             goToCurrentMonth={goToCurrentMonth}
             previousMonth={previousMonth}
             nextMonth={nextMonth} />
+
           {/* === Headers for Days === */}
           <div className="grid grid-cols-7 mt-2 text-sm leading-8 text-center text-gray-500 cursor-default">
             <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
@@ -93,21 +94,7 @@ export default function Calendar() {
       </div>
 
       {/* Calendar */}
-      <div className="grid grid-cols-3 gap-2 divide-x-2 divide-gray-500 divi mb-4">
-
-        <div className="L-Month ">
-          {/* === Days === */}
-          <div className="grid grid-cols-7 mt-0 text-md">
-            {daysOfMonth(getFirstDayPrevMonth()).map((day, dayIndx) => (
-              <CalendarDay
-                key={day.toString()}
-                day={day}
-                dayIndx={dayIndx}
-                firstDayOfMonth={getFirstDayPrevMonth()}
-                dayEvents={getDayEvents(day)} />
-            ))}
-          </div>
-        </div>
+      <div className="grid grid-cols-1 gap-2 divide-x-2 divide-gray-500 divi mb-4">
 
         <div className="M-Month">
           {/* === Days === */}
@@ -118,20 +105,6 @@ export default function Calendar() {
                 day={day}
                 dayIndx={dayIndx}
                 firstDayOfMonth={firstDayCurrentMonth}
-                dayEvents={getDayEvents(day)} />
-            ))}
-          </div>
-        </div>
-
-        <div className="R-Month ">
-          {/* === Days === */}
-          <div className="grid grid-cols-7 mt-0 text-md">
-            {daysOfMonth(getFirstDayNextMonth()).map((day, dayIndx) => (
-              <CalendarDay
-                key={day.toString()}
-                day={day}
-                dayIndx={dayIndx}
-                firstDayOfMonth={getFirstDayNextMonth()}
                 dayEvents={getDayEvents(day)} />
             ))}
           </div>

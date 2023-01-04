@@ -6,14 +6,14 @@ import {
 	WithFieldValue,
 } from "firebase/firestore";
 
-export type Due = {
+type Due = {
 	date: string;
 	dateTime: string;
 	isRecurring: boolean;
 	timezone: string;
 };
 
-export const TaskConverter: FirestoreDataConverter<Task> = {
+const TaskConverter: FirestoreDataConverter<Task> = {
 	toFirestore(task: WithFieldValue<Task>): DocumentData {
 		return {
 			id: task.Id,
@@ -122,4 +122,4 @@ class Task {
 
 // const myTask: Task = new Task();
 
-export default Task;
+// export default Task;
