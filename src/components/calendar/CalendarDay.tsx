@@ -16,12 +16,12 @@ import { selectedDayValue, changeSelectedDay } from '@/redux/calendarSelectedDay
 type Props = {
     day: Date;
     dayIndx: number;
-    firstDayCurrentMonth: Date;
+    firstDayOfMonth: Date;
     dayEvents: Task[];
 }
 
 
-const CalendarDay = ({ day, dayIndx, firstDayCurrentMonth, dayEvents }: Props) => {
+const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
     const dispatch = useDispatch()
     const today = startOfToday();
     const selectedDay = useSelector(selectedDayValue)
@@ -44,8 +44,14 @@ const CalendarDay = ({ day, dayIndx, firstDayCurrentMonth, dayEvents }: Props) =
                     // When NOT Selected
                     !isEqual(day, selectedDay) &&
                     !isToday(day) &&
-                    isSameMonth(day, firstDayCurrentMonth) &&
-                    "text-neutral-400",
+                    isSameMonth(day, firstDayOfMonth) &&
+                    "text-neutral-300",
+
+                    // Days of other month
+                    !isEqual(day, selectedDay) &&
+                    !isToday(day) &&
+                    !isSameMonth(day, firstDayOfMonth) &&
+                    "text-neutral-500",
 
                     // When Selected
                     isEqual(day, selectedDay) &&
@@ -54,7 +60,7 @@ const CalendarDay = ({ day, dayIndx, firstDayCurrentMonth, dayEvents }: Props) =
 
                     // On Hover
                     !isEqual(day, selectedDay) &&
-                    "hover:bg-neutral-700 hover:text-neutral-300",
+                    "hover:bg-neutral-700",
                     // =========================
 
                     // == Today == 

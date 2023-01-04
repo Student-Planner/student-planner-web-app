@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import {
   add,
   eachDayOfInterval,
@@ -11,10 +11,9 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import { faCalendarDay, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import sampleTasks from '@/data/sampleTasks';
 import CalendarDay from "./CalendarDay";
-import { CalendarHeaderButton } from './CalendaryHeaderButton';
+import CalendarHeader from './CalendarHeader';
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectedDayValue, changeSelectedDay } from "@/redux/calendarSelectedDay";
@@ -29,11 +28,15 @@ export default function Calendar() {
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
   // As options to modify
-  const [showDaysOutOfMonth, setShowDaysOutOfMonth] = useState(false)
+  const [showDaysOutOfMonth, setShowDaysOutOfMonth] = useState(true)
 
-  const days = eachDayOfInterval({
-    start: showDaysOutOfMonth ? startOfWeek(firstDayCurrentMonth) : firstDayCurrentMonth,
-    end: showDaysOutOfMonth ? endOfWeek(endOfMonth(firstDayCurrentMonth)) : endOfMonth(firstDayCurrentMonth),
+  // const days = eachDayOfInterval({
+  //   start: showDaysOutOfMonth ? startOfWeek(firstDayCurrentMonth) : firstDayCurrentMonth,
+  //   end: showDaysOutOfMonth ? endOfWeek(endOfMonth(firstDayCurrentMonth)) : endOfMonth(firstDayCurrentMonth),
+  // });
+  const daysOfMonth = (firstDayOfMonth: Date) => eachDayOfInterval({
+    start: showDaysOutOfMonth ? startOfWeek(firstDayOfMonth) : firstDayOfMonth,
+    end: showDaysOutOfMonth ? endOfWeek(endOfMonth(firstDayOfMonth)) : endOfMonth(firstDayOfMonth),
   });
 
   function goToCurrentMonth() {
@@ -50,12 +53,12 @@ export default function Calendar() {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
-  function getPreviousMonth() {
+  function getFirstDayPrevMonth() {
     const firstDayPreviousMonth = add(firstDayCurrentMonth, { months: -1 });
     return firstDayPreviousMonth;
   }
 
-  function getNextMonth() {
+  function getFirstDayNextMonth() {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     return firstDayNextMonth;
   }
@@ -70,39 +73,70 @@ export default function Calendar() {
   ));
 
   return (
-    <div className="md:max-w-4xl max-w-md max-h- mx-auto my-auto md:px-6 px-2 md:py-6 py-2 select-none lg:text-xl md:text-lg">
-      <div className="grid md:grid-cols-2 grid-cols-1 md:divide-x md:divide-gray-600">
-        <div className="mb-4">
-
+    <div className="max-w-7xl max-h- mx-auto my-auto md:px-6 px-2 md:py-6 py-2 select-none lg:text-xl md:text-lg">
+      {/* Header */}
+      <div className="grid grid-cols-3 divide-x-8 divide-transparent mb-4">
+        <div className=""></div>
+        <div>
           {/* Control Header */}
-          <div className="flex justify-items-center outline outline-2 rounded-lg outline-neutral-700 transition-colors hover:bg-neutral-800 duration-300 shadow-md hover:shadow-lg h-14">
-            <h2 className="flex-auto font-semibold md:text-2xl text-2xl place-self-center items-center justify-center my-auto mx-4 text-gray-200">
-              {format(firstDayCurrentMonth, "MMMM yyyy")}
-            </h2>
-
-            <CalendarHeaderButton icon={faCalendarDay} accessTxt='Current month' clickFunction={goToCurrentMonth} prominent={true} />
-            <CalendarHeaderButton icon={faChevronLeft} accessTxt='Previous month' clickFunction={previousMonth} prominent={false} />
-            <CalendarHeaderButton icon={faChevronRight} accessTxt='Next month' clickFunction={nextMonth} prominent={false} />
-
-          </div>
-
+          <CalendarHeader
+            firstDayCurrentMonth={firstDayCurrentMonth}
+            goToCurrentMonth={goToCurrentMonth}
+            previousMonth={previousMonth}
+            nextMonth={nextMonth} />
           {/* === Headers for Days === */}
           <div className="grid grid-cols-7 mt-2 text-sm leading-8 text-center text-gray-500 cursor-default">
             <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
           </div>
+        </div>
+        <div className=""></div>
+      </div>
 
+      {/* Calendar */}
+      <div className="grid grid-cols-3 gap-2 divide-x-2 divide-gray-500 divi mb-4">
+
+        <div className="L-Month ">
           {/* === Days === */}
           <div className="grid grid-cols-7 mt-0 text-md">
-            {days.map((day, dayIndx) => (
+            {daysOfMonth(getFirstDayPrevMonth()).map((day, dayIndx) => (
               <CalendarDay
                 key={day.toString()}
                 day={day}
                 dayIndx={dayIndx}
-                firstDayCurrentMonth={firstDayCurrentMonth}
+                firstDayOfMonth={getFirstDayPrevMonth()}
                 dayEvents={getDayEvents(day)} />
             ))}
           </div>
         </div>
+
+        <div className="M-Month">
+          {/* === Days === */}
+          <div className="grid grid-cols-7 mt-0 text-md">
+            {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
+              <CalendarDay
+                key={day.toString()}
+                day={day}
+                dayIndx={dayIndx}
+                firstDayOfMonth={firstDayCurrentMonth}
+                dayEvents={getDayEvents(day)} />
+            ))}
+          </div>
+        </div>
+
+        <div className="R-Month ">
+          {/* === Days === */}
+          <div className="grid grid-cols-7 mt-0 text-md">
+            {daysOfMonth(getFirstDayNextMonth()).map((day, dayIndx) => (
+              <CalendarDay
+                key={day.toString()}
+                day={day}
+                dayIndx={dayIndx}
+                firstDayOfMonth={getFirstDayNextMonth()}
+                dayEvents={getDayEvents(day)} />
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );

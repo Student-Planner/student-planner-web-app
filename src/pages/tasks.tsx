@@ -2,9 +2,6 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@r
 import React from 'react'
 import styles from '@/styles/Home.module.css'
 
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-
 type Props = {}
 
 function Tasks({ }) {
