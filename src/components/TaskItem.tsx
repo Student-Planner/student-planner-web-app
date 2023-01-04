@@ -1,5 +1,4 @@
 import React from 'react'
-import Task from "@/data/Task";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import sampleTasks from '@/data/sampleTasks';
 import styles from '@/styles/Calendar.module.scss'
+import { Task } from '@prisma/client';
 
 
 type Props = {
@@ -23,12 +23,12 @@ function TaskItem({ task }: Props) {
 
             {/* Task content */}
             <div className="pl-2">
-                {task.Title}
+                {task.title}
             </div>
 
             {/* Task Description */}
             <p className="m-2 max-h-4 max-w-full text-xs truncate">
-                {task.Description}
+                {task.description}
             </p>
 
             {/* Tages: Maybe colors to indicate course */}
