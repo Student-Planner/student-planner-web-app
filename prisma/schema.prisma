@@ -19,6 +19,7 @@ model User {
   lastName  String
 }
 
+// TODO fix the default color 
 model Task {
   id          String   @id @default(uuid())
   title       String
@@ -29,6 +30,7 @@ model Task {
   isRecurring Boolean? @default(false)
   isCompleted Boolean  @default(false)
   labels      String[]
+  color       String   @default("#98999b")
 
   @@index([title, description, labels])
 }
