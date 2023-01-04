@@ -23,14 +23,14 @@ model User {
 model Task {
   id          String   @id @default(uuid())
   title       String
-  description String?
+  description String   @default("")
   due         DateTime
   created     DateTime @default(now())
   updated     DateTime @updatedAt
-  isRecurring Boolean? @default(false)
+  isRecurring Boolean  @default(false)
   isCompleted Boolean  @default(false)
-  labels      String[]
   color       String   @default("#98999b")
+  labels      String[]
 
   @@index([title, description, labels])
 }
