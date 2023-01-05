@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { classNames } from '../utils/utils';
+import Avatar from './auth/Avatar';
 
 type Props = {}
 
@@ -37,7 +38,7 @@ function Navbar({ }: Props) {
                     <NavbarButton link='#' prominent={false} icon={faCircleInfo}>About</NavbarButton>
                     <NavbarButton link='#' prominent={false} icon={faBriefcase}>Service</NavbarButton>
                     <NavbarButton link='#' prominent={false} icon={faAddressBook}>Contact</NavbarButton>
-                    <NavbarButton link='#' prominent={true} icon={faSignIn}>Sign Up</NavbarButton>
+                    <Avatar />
                 </ul>
             </nav>
         </div >

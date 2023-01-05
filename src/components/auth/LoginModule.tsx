@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
 import UseProviderButton from './LoginProviderButton';
 import { ImFacebook, ImGoogle } from 'react-icons/im'
 import { FcGoogle } from 'react-icons/fc'
 import AuthFormTextbox from './AuthFormTextfield';
 import { classNames } from '../../utils/utils';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { CheckIcon } from '@radix-ui/react-icons';
 
 type Props = {}
 
 function LoginModule({ }: Props) {
     const [clickedSubmit, setClickedSubmit] = useState(false);
+
 
     function loginUser(e): void {
         // TODO login the user with credentials and disable submit if everything is valid
@@ -16,7 +20,7 @@ function LoginModule({ }: Props) {
     }
 
     return (
-        <div className="max-w-md mx-auto mt-24">
+        <div className="max-w-md mx-auto mt-24 select-none">
             <div className="p-16 relative w-[450px] rounded-2xl before:absolute before:content-none before:bg-white before:opacity-20 before:-rotate-6 before:inset-0 before:rounded-2xl before:z-[-1] bg-black ">
                 <div className="mb-8 text-center">
                     <FcGoogle />
@@ -28,13 +32,21 @@ function LoginModule({ }: Props) {
                 <form className="flex flex-col gap-2">
                     <AuthFormTextbox fieldName={'Email'} placeholder={'Enter Email'} textfieldType={'email'} />
                     <AuthFormTextbox fieldName={'Password'} placeholder={'Enter Password'} textfieldType={'password'} />
+
                     <div className="flex items-center justify-between my-2">
-                        <div className="flex items-center">
-                            <input className='focus:bg-white w-4 h-4 mr-1' type="checkbox" id="rememberMeCheckbox" defaultChecked={false} />
-                            <label htmlFor="rememberMeCheckbox">Remember me</label>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Checkbox.Root className="w-5 h-5 rounded flex items-center justify-center focus:bg-neutral-300 focus:outline-none bg-neutral-500 shadow-sm " defaultChecked id="rememberMeCheckbox">
+                                <Checkbox.Indicator className="text-black text-xl">
+                                    <CheckIcon />
+                                </Checkbox.Indicator>
+                            </Checkbox.Root>
+                            <label className="text-white pl-2 text-sm leading-none" htmlFor="rememberMeCheckbox">
+                                Remember me
+                            </label>
                         </div>
                         <a className='no-underline hover:underline text-red-600' href="#">I forgot my password!</a>
                     </div>
+
                     <button className={classNames(clickedSubmit ? 'bg-neutral-800 text-gray-400' : 'bg-neutral-900 text-white', 'p-4 text-center uppercase rounded-full tracking-widest transition-all duration-500')} type="submit" onClick={loginUser} disabled={clickedSubmit ? true : false}>Sign In</button>
                 </form>
                 <div className="text-center mt-4">
@@ -46,7 +58,7 @@ function LoginModule({ }: Props) {
                 <div className="flex items-center justify-center gap-4 uppercase opacity-80">
 
                     {/* <LoginOptionButton link='#' icon={<ImFacebook className='text-xl' />} /> */}
-                    <UseProviderButton link='#' icon={<FcGoogle className='text-xl' />} />
+                    <UseProviderButton icon={<FcGoogle className='text-xl' />} onClick={() => { signIn(); }} />
 
                 </div>
             </div>
