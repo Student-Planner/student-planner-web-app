@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import {
   add,
   eachDayOfInterval,
@@ -16,13 +16,16 @@ import CalendarDay from "./CalendarDay";
 import CalendarHeader from './CalendarHeader';
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectedDayValue, changeSelectedDay } from "@/redux/calendarSelectedDay";
+import { useContainer } from "unstated-next";
+import { SelectedDay } from '../../pages/_app';
 
 export default function Calendar() {
-  const dispatch = useDispatch()
   const today = startOfToday();
-  const selectedDay = useSelector(selectedDayValue)
-  const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
+  // const dispatch = useDispatch()
+  // const selectedDay = useSelector(selectedDayValue)
+  // const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
+
+  const selectedDay = useContainer(SelectedDay)
 
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -30,10 +33,7 @@ export default function Calendar() {
   // As options to modify
   const [showDaysOutOfMonth, setShowDaysOutOfMonth] = useState(true)
 
-  // const days = eachDayOfInterval({
-  //   start: showDaysOutOfMonth ? startOfWeek(firstDayCurrentMonth) : firstDayCurrentMonth,
-  //   end: showDaysOutOfMonth ? endOfWeek(endOfMonth(firstDayCurrentMonth)) : endOfMonth(firstDayCurrentMonth),
-  // });
+
   const daysOfMonth = (firstDayOfMonth: Date) => eachDayOfInterval({
     start: showDaysOutOfMonth ? startOfWeek(firstDayOfMonth) : firstDayOfMonth,
     end: showDaysOutOfMonth ? endOfWeek(endOfMonth(firstDayOfMonth)) : endOfMonth(firstDayOfMonth),
@@ -75,8 +75,7 @@ export default function Calendar() {
   return (
     <div className="max-w-lg max-h- mx-auto my-auto md:px-6 px-2 md:py-6 py-2 select-none lg:text-xl md:text-lg">
       {/* Header */}
-      <div className="grid grid-cols-1 divide-x-8 divide-transparent mb-4">
-        <div className=""></div>
+      <div className="grid grid-cols-1 divide-x-8 divide-transparent mb-2">
         <div>
           {/* Control Header */}
           <CalendarHeader
@@ -90,11 +89,10 @@ export default function Calendar() {
             <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
           </div>
         </div>
-        <div className=""></div>
       </div>
 
       {/* Calendar */}
-      <div className="grid grid-cols-1 gap-2 divide-x-2 divide-gray-500 divi mb-4">
+      <div className="grid grid-cols-1  divide-x-2 divide-gray-500 divi mb-4">
 
         <div className="M-Month">
           {/* === Days === */}

@@ -25,7 +25,6 @@ function Navbar({ }: Props) {
     return (
         <div className="h-[15vh] select-none">
             <nav className='flex justify-between items-center lg:text-xl md:text-lg px-8 py-0 bg-neutral-800 shadow-lg w-auto h-20 rounded-xl fixed inset-x-8 top-5'>
-
                 <h1 className='text-white justify-self-start flex-shrink-0 cursor-pointer'>
                     <span>Student Planner</span> <FontAwesomeIcon className='ml-1 text-xl' icon={faLandmark} />
                 </h1>

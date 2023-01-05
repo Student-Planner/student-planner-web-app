@@ -9,7 +9,7 @@ import {
 } from "date-fns";
 import { classNames } from '@/utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedDayValue, changeSelectedDay } from '@/redux/calendarSelectedDay';
+import { selectedDayValue, changeSelectedDay } from '../../../lib/redux/calendarSelectedDay';
 import { Task } from '@prisma/client';
 
 
@@ -81,7 +81,7 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                     "font-medium",
 
                     // Other common styles
-                    'mx-auto mb-1 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-150'
+                    'mx-auto flex h-14 w-14 items-center justify-center rounded-full transition-all duration-150'
                 )}>
                 <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}
