@@ -47,7 +47,7 @@ function LoginModule({ }: Props) {
                         <a className='no-underline hover:underline text-red-600' href="#">I forgot my password!</a>
                     </div>
 
-                    <button className={classNames(clickedSubmit ? 'bg-neutral-800 text-gray-400' : 'bg-neutral-900 text-white', 'p-4 text-center uppercase rounded-full tracking-widest transition-all duration-500')} type="submit" onClick={loginUser} disabled={clickedSubmit ? true : false}>Sign In</button>
+                    <button className={classNames(clickedSubmit ? 'bg-neutral-700 text-gray-400' : 'bg-neutral-800 text-white', 'p-4 text-center uppercase rounded-full tracking-widest transition-all duration-500')} type="submit" onClick={loginUser} disabled={clickedSubmit ? true : false}>Sign In</button>
                 </form>
                 <div className="text-center mt-4">
                     Don't have an account? <a className='no-underline hover:underline text-red-600' href="#">Create a free account.</a>
