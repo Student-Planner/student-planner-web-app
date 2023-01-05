@@ -22,6 +22,8 @@ model Task {
   isCompleted Boolean  @default(false)
   color       String   @default("#98999b")
   labels      String[]
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?
 
   @@index([title, description, labels])
 }
@@ -61,6 +63,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  tasks Task[]
 }
 
 model VerificationToken {
