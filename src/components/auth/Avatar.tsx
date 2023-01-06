@@ -19,8 +19,8 @@ function Avatar({ }: Props) {
     }, [session, status])
 
     return (
-        <RadixTooltip.Root>
-            <RadixTooltip.Trigger>
+        // <RadixTooltip.Root>
+            // <RadixTooltip.Trigger>
                 <RadixAvatar.Root className="inline-flex items-center justify-center align-middle overflow-hidden select-none w-12 h-12 rounded-[100%]">
                     {imageUrl && <RadixAvatar.Image
                         className="AvatarImage w-full h-full object-cover rounded-[inherit]"
@@ -31,12 +31,12 @@ function Avatar({ }: Props) {
                          // PD TODO add initials
                        </RadixAvatar.Fallback> */}
                 </RadixAvatar.Root>
-            </RadixTooltip.Trigger>
-            <RadixTooltip.Content side="top">
-                Tooltip content
-                <RadixTooltip.Arrow />
-            </RadixTooltip.Content>
-        </RadixTooltip.Root>
+            // </RadixTooltip.Trigger>
+            // <RadixTooltip.Content side="top">
+            //     Tooltip content
+            //     <RadixTooltip.Arrow />
+            // </RadixTooltip.Content>
+        // </RadixTooltip.Root>
     )
 }
 

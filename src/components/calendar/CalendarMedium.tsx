@@ -22,7 +22,7 @@ import { GetServerSideProps } from "next";
 
 type Props = {}
 
-export default function Calendar({ }: Props) {
+export default function CalendarMedium({ }: Props) {
   const today = startOfToday();
   const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
   const { monthEvents, setMonthEvents } = MonthEvents.useContainer()
@@ -66,7 +66,7 @@ export default function Calendar({ }: Props) {
   const getDayEvents = (day: Date) => (monthEvents.filter((event) => isSameDay(event.due, day)));
 
   return (
-    <div className="max-w-xl w-[40rem] md:px-4 md:py-4 select-none lg:text-2xl md:text-xl font-light">
+    <div className="max-w-lg w-[30rem] md:px-4 md:py-4 select-none lg:text-xl md:text-lg">
       {/* Header */}
       <div className="grid grid-cols-1 divide-x-8 divide-transparent mb-2">
         <div>
@@ -78,7 +78,7 @@ export default function Calendar({ }: Props) {
             nextMonth={nextMonth} />
 
           {/* === Headers for Days === */}
-          <div className="grid grid-cols-7 mt-5 text-lg leading-8 text-center font-normal text-gray-500 cursor-default">
+          <div className="grid grid-cols-7 mt-2 text-sm leading-8 text-center text-gray-500 cursor-default">
             <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
           </div>
         </div>

@@ -33,7 +33,7 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
             className={classNames(
                 dayIndx === 0 &&
                 colStartClasses[getDay(day)],
-                "mt-[0.6rem] px-auto"
+                "mt-4 px-auto"
             )}>
             <button
                 type="button"
@@ -78,10 +78,10 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
 
                     // Bolden Selected Day & Today 
                     (isEqual(day, selectedDayValue) || isToday(day)) &&
-                    "font-medium",
+                    "font-normal",
 
                     // Other common styles
-                    'mx-auto flex h-14 w-14 items-center justify-center rounded-full transition-all duration-150'
+                    'mx-auto flex h-16 w-16 items-center justify-center rounded-full transition-all duration-100'
                 )}>
                 <time dateTime={format(day, "yyyy-MM-dd")}>
                     {format(day, "d")}

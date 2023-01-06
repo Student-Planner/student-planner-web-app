@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React from "react";
 import {
     format,
 } from "date-fns";
@@ -15,8 +15,8 @@ type Props = {
 
 function CalendarHeader({ firstDayCurrentMonth, goToCurrentMonth, previousMonth, nextMonth, }: Props) {
     return (
-        <div className="flex justify-items-center outline outline-2 rounded-lg outline-neutral-700 transition-colors hover:bg-neutral-800 duration-300 shadow-md hover:shadow-lg h-14">
-            <h2 className="flex-auto font-semibold md:text-2xl text-2xl place-self-center items-center justify-center my-auto mx-4 text-gray-200">
+        <div className="flex justify-items-center outline outline-2 rounded-lg pl-6  outline-neutral-700 transition-colors hover:bg-neutral-800 duration-300 shadow-md hover:shadow-lg min-h-fit h-[4.5rem]">
+            <h2 className="flex-auto font-semibold md:text-3xl text-xl place-self-center items-center justify-center my-auto text-gray-200">
                 {format(firstDayCurrentMonth, "MMMM yyyy")}
             </h2>
 

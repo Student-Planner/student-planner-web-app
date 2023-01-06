@@ -4,7 +4,7 @@ export default function Document(props) {
     return (
         <Html>
             <Head />
-            <body className="bg-neutral-900">
+            <body className='bg-neutral-900'>
                 <Main />
                 <NextScript />
             </body>
