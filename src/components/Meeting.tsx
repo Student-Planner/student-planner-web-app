@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import Image from 'next/image';
 import React from 'react'
 
 type Props = {
@@ -53,7 +54,7 @@ function Meeting({ meeting }) {
 
   return (
     <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
-      <img
+      <Image
         src={meeting.imageUrl}
         alt=""
         className="flex-none w-10 h-10 rounded-full"

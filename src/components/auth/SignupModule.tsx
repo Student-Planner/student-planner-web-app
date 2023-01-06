@@ -4,6 +4,7 @@ import { ImFacebook, ImGoogle } from 'react-icons/im'
 import { FcGoogle } from 'react-icons/fc'
 import AuthFormTextbox from './AuthFormTextfield';
 import { classNames } from '../../utils/utils';
+import Link from 'next/link';
 
 type Props = {}
 
@@ -34,13 +35,13 @@ function SignupModule({ }: Props) {
                     </button>
                 </form>
                 <div className="text-center mt-4">
-                    Already have an account? <a className='no-underline hover:underline text-red-600' href="/login">Sign in here.</a>
+                    Already have an account? <Link className='no-underline hover:underline text-red-600' href="/login">Sign in here.</Link>
                 </div>
             </div>
             <div className="flex flex-col gap-6 text-center mt-12">
                 <div className='uppercase opacity-80 tracking-wider text-xs'>Other Sign-Up Options</div>
                 <div className="flex items-center justify-center gap-4 uppercase opacity-80">
-                    <UseProviderButton link='#' icon={<FcGoogle className='text-xl' />} />
+                    <UseProviderButton icon={<FcGoogle className='text-xl' />} />
                 </div>
             </div>
         </div>

@@ -64,28 +64,24 @@ function login({ }) {
                                 style={{
                                     display: "flex",
                                     alignItems: "center",
-                                }}
-                            >
+                                }}>
                                 <Checkbox.Root
                                     className="w-5 h-5 rounded flex items-center justify-center focus:bg-neutral-300 focus:outline-none bg-neutral-500 shadow-sm "
                                     defaultChecked
-                                    id="rememberMeCheckbox"
-                                >
+                                    id="rememberMeCheckbox">
                                     <Checkbox.Indicator className="text-black text-xl">
                                         <CheckIcon />
                                     </Checkbox.Indicator>
                                 </Checkbox.Root>
                                 <label
                                     className="text-white pl-2 text-sm leading-none"
-                                    htmlFor="rememberMeCheckbox"
-                                >
+                                    htmlFor="rememberMeCheckbox">
                                     Remember me
                                 </label>
                             </div>
                             <a
                                 className="no-underline hover:underline text-red-600"
-                                href="#"
-                            >
+                                href="#">
                                 I forgot my password!
                             </a>
                         </div>
@@ -99,8 +95,7 @@ function login({ }) {
                             )}
                             type="submit"
                             onClick={loginUser}
-                            disabled={submitLoading ? true : false}
-                        >
+                            disabled={submitLoading ? true : false}>
                             {submitLoading ? (
                                 <div className="loading-spinner w-8 h-8 mx-auto border-2 border-transparent rounded-[100%] border-t-3 border-t-slate-400 animate-spin duration-2000"></div>
                             ) : (
@@ -109,11 +104,10 @@ function login({ }) {
                         </button>
                     </form>
                     <div className="text-center mt-4">
-                        Don't have an account?{" "}
+                        Don&apos;t have an account?{" "}
                         <a
                             className="no-underline hover:underline text-red-600"
-                            href="#"
-                        >
+                            href="#">
                             Create a free account.
                         </a>
                     </div>
