@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
-import UseProviderButton from './LoginProviderButton';
+import signInProviderButton from './LoginProviderButton';
 import { ImFacebook, ImGoogle } from 'react-icons/im'
 import { FcGoogle } from 'react-icons/fc'
 import AuthFormTextbox from './AuthFormTextfield';
 import { classNames } from '../../utils/utils';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
+import LoginProviderButton from './LoginProviderButton';
 
 type Props = {}
 
@@ -58,7 +59,7 @@ function LoginModule({ }: Props) {
                 <div className="flex items-center justify-center gap-4 uppercase opacity-80">
 
                     {/* <LoginOptionButton link='#' icon={<ImFacebook className='text-xl' />} /> */}
-                    <UseProviderButton icon={<FcGoogle className='text-xl' />} onClick={() => { signIn(); }} />
+                    <LoginProviderButton icon={<FcGoogle className='text-xl' />} onClick={() => { signIn(); }} />
 
                 </div>
             </div>

@@ -21,7 +21,7 @@ export default function Home({ }) {
             Router.push("/login");
             setCalledPush(true);
         }
-    }, [status, session]);
+    }, [status, session, calledPush]);
 
 
 

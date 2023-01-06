@@ -5,7 +5,7 @@ type Props = {
     onClick?: () => void;
 }
 
-function UseProviderButton({ icon, onClick }: Props) {
+function LoginProviderButton({ icon, onClick }: Props) {
 
     return (
         <div>
@@ -16,4 +16,4 @@ function UseProviderButton({ icon, onClick }: Props) {
     )
 }
 
-export default UseProviderButton
+export default LoginProviderButton

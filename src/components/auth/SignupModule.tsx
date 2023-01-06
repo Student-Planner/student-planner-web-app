@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import UseProviderButton from './LoginProviderButton';
+import signInProviderButton from './LoginProviderButton';
 import { ImFacebook, ImGoogle } from 'react-icons/im'
 import { FcGoogle } from 'react-icons/fc'
 import AuthFormTextbox from './AuthFormTextfield';
@@ -41,7 +41,7 @@ function SignupModule({ }: Props) {
             <div className="flex flex-col gap-6 text-center mt-12">
                 <div className='uppercase opacity-80 tracking-wider text-xs'>Other Sign-Up Options</div>
                 <div className="flex items-center justify-center gap-4 uppercase opacity-80">
-                    <UseProviderButton icon={<FcGoogle className='text-xl' />} />
+                    {/* <LoginProviderButton icon={<FcGoogle className='text-xl' />} /> */}
                 </div>
             </div>
         </div>

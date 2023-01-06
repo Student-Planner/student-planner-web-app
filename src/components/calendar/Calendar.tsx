@@ -12,7 +12,7 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import sampleTasks from '@/data/sampleTasks';
+import sampleTasks from '@/data/sampleEvents';
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from './CalendarHeader';
 import { MonthEvents, SelectedDay } from '../../pages/_app';

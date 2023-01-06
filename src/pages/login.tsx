@@ -1,21 +1,17 @@
-import Head from "next/head";
-import React, { useEffect, useState } from "react";
-import LoginModule from "@/components/auth/LoginModule";
-import { useSession, signIn, signOut } from "next-auth/react";
-import Router from "next/router";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import AuthFormTextbox from "@/components/auth/AuthFormTextfield";
-import UseProviderButton from "@/components/auth/LoginProviderButton";
-import { classNames } from "@/utils/utils";
-import { CheckIcon } from "@radix-ui/react-icons";
-import { FcGoogle } from "react-icons/fc";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import { Fragment } from "react";
+import AuthFormTextbox from '@/components/auth/AuthFormTextfield';
+import LoginProviderButton from '@/components/auth/LoginProviderButton';
+import { classNames } from '@/utils/utils';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { CheckIcon } from '@radix-ui/react-icons';
+import { useSession, signIn } from 'next-auth/react';
+import Head from 'next/head';
+import Router from 'next/router';
+import React, { useEffect, useState } from 'react'
+import { FcGoogle } from 'react-icons/fc';
 
-type Props = {};
+type Props = {}
 
-function login({ }) {
+export default function Login({ }) {
     const { data: session, status } = useSession();
     const [submitLoading, setSubmitLoading] = useState(false);
 
@@ -118,7 +114,7 @@ function login({ }) {
                     </div>
                     <div className="flex items-center justify-center gap-4 uppercase opacity-80">
                         {/* <LoginOptionButton link='#' icon={<ImFacebook className='text-xl' />} /> */}
-                        <UseProviderButton
+                        <LoginProviderButton
                             icon={<FcGoogle className="text-xl" />}
                             onClick={() => {
                                 signIn();
@@ -130,5 +126,3 @@ function login({ }) {
         </>
     );
 }
-
-export default login;

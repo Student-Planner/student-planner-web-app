@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import sampleTasks from "@/data/sampleTasks";
-import Task from "@/data/Task";
+import sampleEvents from "@/data/sampleEvents";
+import { Event } from "@prisma/client";
 
 export default function handler(req, res) {
-	const tasks: Task[] = sampleTasks;
-	res.status(200).json(tasks);
+	const events: Event[] = sampleEvents;
+	res.status(200).json(events);
 }
