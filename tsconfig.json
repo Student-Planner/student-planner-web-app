@@ -26,7 +26,8 @@
 		"src/colors.ts",
 		"lib/redux/rootReducer",
 		"clear.js",
-		"test.js"
+		"test.js",
+		"createSample.js"
 	],
 	"exclude": ["node_modules"]
 }

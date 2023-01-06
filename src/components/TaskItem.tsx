@@ -1,25 +1,25 @@
 import React from 'react'
-import { Task } from '@prisma/client';
+import { Event } from '@prisma/client';
 
 
 type Props = {
-    task: Task
+    event: Event
 }
 
 {/* Huge button to open detals */ }
 {/* Checkbox button */ }
-function TaskItem({ task }: Props) {
+function EventItem({ event }: Props) {
     return (
         <button className='rounded-lg ring-gray-600 ring-2 ring-solid hover:bg-gray-700 container w-full max-h-28 my-1 ' role="checkbox" type='button' aria-checked>
 
-            {/* Task content */}
+            {/* Event content */}
             <div className="pl-2">
-                {task.title}
+                {event.title}
             </div>
 
-            {/* Task Description */}
+            {/* Event Description */}
             <p className="m-2 max-h-4 max-w-full text-xs truncate">
-                {task.description}
+                {event.description}
             </p>
 
             {/* Tages: Maybe colors to indicate course */}
@@ -29,4 +29,4 @@ function TaskItem({ task }: Props) {
 }
 
 
-export default TaskItem
+export default EventItem

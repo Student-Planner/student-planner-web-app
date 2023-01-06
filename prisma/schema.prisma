@@ -11,13 +11,13 @@ datasource db {
 }
 
 // TODO fix the default color 
-model Task {
+model Event {
   id          String   @id @default(uuid())
   title       String
   description String   @default("")
   due         DateTime
   created     DateTime @default(now())
-  updated     DateTime @updatedAt
+  updated     DateTime @default(now()) @updatedAt
   isRecurring Boolean  @default(false)
   isCompleted Boolean  @default(false)
   color       String   @default("#98999b")
@@ -64,7 +64,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  tasks Task[]
+  events Event[]
 }
 
 model VerificationToken {

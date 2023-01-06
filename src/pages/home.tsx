@@ -1,34 +1,39 @@
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import Router from 'next/router';
-import Head from 'next/head';
-import Calendar from '@/components/calendar/Calendar';
-import Navbar from '@/components/Navbar';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
+import Head from "next/head";
+import Navbar from "@/components/Navbar";
+import Events from "@/components/calendar/Events";
+import { Event } from "@prisma/client";
+import Calendar from "@/components/calendar/Calendar";
+
 
 type Props = {
-
-}
+    events: Event[];
+};
 
 export default function Home({ }) {
-    const { data: session, status } = useSession()
+    const { data: session, status } = useSession();
+    const [calledPush, setCalledPush] = useState(false);
 
     useEffect(() => {
-        if (!(status === 'authenticated')) {
-            Router.push('/login')
+        if ((!(status === "authenticated") || !session) && !calledPush) {
+            Router.push("/login");
+            setCalledPush(true);
         }
-    }, [session, status])
+    }, [status, session]);
+
+
 
     return (
-        <div className=''>
+        <>
             <Head>
                 <title>Home</title>
-                <body className='bg-neutral-900' />
             </Head>
 
             <Navbar />
             <Calendar />
-
-
-        </div>
-    )
+            <Events />
+        </>
+    );
 }

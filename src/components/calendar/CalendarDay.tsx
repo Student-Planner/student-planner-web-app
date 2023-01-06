@@ -10,22 +10,22 @@ import {
 import { classNames } from '@/utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectedDayValue, changeSelectedDay } from '../../../lib/redux/calendarSelectedDay';
-import { Task } from '@prisma/client';
-
+import { SelectedDay } from '../../pages/_app';
+import { Event } from '@prisma/client';
 
 type Props = {
     day: Date;
     dayIndx: number;
     firstDayOfMonth: Date;
-    dayEvents: Task[];
+    dayEvents: Event[];
 }
 
 
 const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
-    const dispatch = useDispatch()
-    const today = startOfToday();
-    const selectedDay = useSelector(selectedDayValue)
-    const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
+    // const dispatch = useDispatch()
+    // const selectedDay = useSelector(selectedDayValue)
+    // const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
+    const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
 
     return (
         <div
@@ -42,42 +42,42 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                     // == Common Day in Month == 
 
                     // When NOT Selected
-                    !isEqual(day, selectedDay) &&
+                    !isEqual(day, selectedDayValue) &&
                     !isToday(day) &&
                     isSameMonth(day, firstDayOfMonth) &&
                     "text-neutral-300",
 
                     // Days of other month
-                    !isEqual(day, selectedDay) &&
+                    !isEqual(day, selectedDayValue) &&
                     !isToday(day) &&
                     !isSameMonth(day, firstDayOfMonth) &&
                     "text-neutral-500",
 
                     // When Selected
-                    isEqual(day, selectedDay) &&
+                    isEqual(day, selectedDayValue) &&
                     !isToday(day) &&
                     "bg-neutral-600",
 
                     // On Hover
-                    !isEqual(day, selectedDay) &&
+                    !isEqual(day, selectedDayValue) &&
                     "hover:bg-neutral-700",
                     // =========================
 
                     // == Today == 
 
                     // When NOT Selected
-                    !isEqual(day, selectedDay) &&
+                    !isEqual(day, selectedDayValue) &&
                     isToday(day) &&
                     "text-red-500 hover:bg-neutral-700",
 
                     // When Selected
-                    isEqual(day, selectedDay) &&
+                    isEqual(day, selectedDayValue) &&
                     isToday(day) &&
                     "bg-red-500",
                     // =========================
 
                     // Bolden Selected Day & Today 
-                    (isEqual(day, selectedDay) || isToday(day)) &&
+                    (isEqual(day, selectedDayValue) || isToday(day)) &&
                     "font-medium",
 
                     // Other common styles

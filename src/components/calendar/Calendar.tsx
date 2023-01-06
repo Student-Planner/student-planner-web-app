@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   add,
   eachDayOfInterval,
@@ -7,6 +7,7 @@ import {
   startOfWeek,
   format,
   isSameDay,
+  isSameMonth,
   parse,
   parseISO,
   startOfToday,
@@ -14,18 +15,17 @@ import {
 import sampleTasks from '@/data/sampleTasks';
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from './CalendarHeader';
+import { MonthEvents, SelectedDay } from '../../pages/_app';
+import { Event } from "@prisma/client";
+import { GetServerSideProps } from "next";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useContainer } from "unstated-next";
-import { SelectedDay } from '../../pages/_app';
 
-export default function Calendar() {
+type Props = {}
+
+export default function Calendar({ }: Props) {
   const today = startOfToday();
-  // const dispatch = useDispatch()
-  // const selectedDay = useSelector(selectedDayValue)
-  // const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
-
-  const selectedDay = useContainer(SelectedDay)
+  const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
+  const { monthEvents, setMonthEvents } = MonthEvents.useContainer()
 
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -63,14 +63,7 @@ export default function Calendar() {
     return firstDayNextMonth;
   }
 
-  // Filter for task of current day
-  const selectedDayEvents = sampleTasks.filter((event) =>
-    isSameDay(event.due, selectedDay)
-  );
-
-  const getDayEvents = (day: Date) => (sampleTasks.filter((event) =>
-    isSameDay(event.due, day)
-  ));
+  const getDayEvents = (day: Date) => (monthEvents.filter((event) => isSameDay(event.due, day)));
 
   return (
     <div className="max-w-lg max-h- mx-auto my-auto md:px-6 px-2 md:py-6 py-2 select-none lg:text-xl md:text-lg">
@@ -94,18 +87,16 @@ export default function Calendar() {
       {/* Calendar */}
       <div className="grid grid-cols-1  divide-x-2 divide-gray-500 divi mb-4">
 
-        <div className="M-Month">
-          {/* === Days === */}
-          <div className="grid grid-cols-7 mt-0 text-md">
-            {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
-              <CalendarDay
-                key={day.toString()}
-                day={day}
-                dayIndx={dayIndx}
-                firstDayOfMonth={firstDayCurrentMonth}
-                dayEvents={getDayEvents(day)} />
-            ))}
-          </div>
+        {/* === Days === */}
+        <div className="grid grid-cols-7 mt-0 text-md">
+          {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
+            <CalendarDay
+              key={day.toString()}
+              day={day}
+              dayIndx={dayIndx}
+              firstDayOfMonth={firstDayCurrentMonth}
+              dayEvents={getDayEvents(day)} />
+          ))}
         </div>
 
       </div>
