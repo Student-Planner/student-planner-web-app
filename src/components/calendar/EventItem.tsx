@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Event } from '@prisma/client';
 import { classNames, concatenate } from '../../utils/utils';
 import { CalendarHeaderButton } from './CalendaryHeaderButton';
@@ -22,11 +22,20 @@ function EventItem({ event }: Props) {
         throw new Error('Function not implemented.');
     }
 
+    function onEventClick(e): void {
+        throw new Error('Function not implemented.');
+    }
+
+    useEffect(() => {
+        console.log(document.getElementsByClassName("coloredItem")[0].classList)
+    }, [])
+
+
     return (
-        <button className='group/event-item flex flex-row justify-between hover:bg-neutral-700 container min-h-fit w-full max-h-16 h-16 mx-0 outline outline-2 rounded-md px-1 outline-neutral-700 transition-colors duration-200 shadow-md hover:shadow-lg' role="checkbox" type='button' aria-checked>
+        <a className='group/event-item flex flex-row justify-between hover:bg-neutral-700 container min-h-fit w-full max-h-16 h-16 mx-0 outline outline-2 rounded-md px-1 outline-neutral-700 transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer' onClick={onEventClick} aria-checked>
 
             <div className="content flex flex-row ml-4 gap-4 my-auto">
-                <div className={classNames("h-5 w-5 my-auto rounded-md", concatenate("bg-[", "#fc3d03", "]") + " ")}></div>
+                <div className={`coloredItem h-5 w-5 my-auto rounded-md bg-[${event.color}]`}></div>
                 <div className="text-2xl my-auto">
                     {/* {"Math Study 11.6"} */}
                     {event.title}
@@ -45,7 +54,7 @@ function EventItem({ event }: Props) {
                 <EventItemButton icon={<FaCalendar />} onClick={reScheduleItem} />
             </div>
 
-        </button>
+        </a>
     )
 }
 
