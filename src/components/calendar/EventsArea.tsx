@@ -1,6 +1,6 @@
 import { MonthEvents, SelectedDay } from "@/pages/_app";
 import { Event } from "@prisma/client";
-import { format, isSameDay } from "date-fns";
+import { format, isSameDay, parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
 import EventItem from "../EventItem";
 import sampleEvents from '../../data/sampleEvents'
@@ -12,8 +12,9 @@ function EventsArea({ }: Props) {
     const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
     const [dayEvents, setDayEvents] = useState<Event[]>([]);
 
+    // TODO swap sample events
     const getDayEvents = (day: Date) =>
-        sampleEvents.filter((event) => isSameDay(event.due, day));
+        sampleEvents.filter((event) => isSameDay(parseISO(event.due as string), day));
 
     useEffect(() => {
         setDayEvents(getDayEvents(selectedDayValue));

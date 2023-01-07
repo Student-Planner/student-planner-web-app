@@ -7,63 +7,68 @@ import {
   startOfWeek,
   format,
   isSameDay,
-  isSameMonth,
   parse,
   parseISO,
   startOfToday,
 } from "date-fns";
 import CalendarDay from "./CalendarDay";
-import CalendarHeader from './CalendarHeader';
-import { MonthEvents, SelectedDay } from '../../pages/_app';
+import CalendarHeader from "./CalendarHeader";
+import { MonthEvents, SelectedDay } from "../../pages/_app";
 import { Event } from "@prisma/client";
 import { GetServerSideProps } from "next";
-import sampleEvents from '../../data/sampleEvents'
+import sampleEvents from "../../data/sampleEvents";
 
-
-type Props = {}
+type Props = {};
 
 export default function Calendar({ }: Props) {
   const today = startOfToday();
-  const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
-  const { monthEvents, setMonthEvents } = MonthEvents.useContainer()
+  const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer();
+  const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
 
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
 
-  // As options to modify
-  const [showDaysOutOfMonth, setShowDaysOutOfMonth] = useState(true)
+	// As options to modify
+  const [showDaysOutOfMonth, setShowDaysOutOfMonth] = useState(true);
 
-
-  const daysOfMonth = (firstDayOfMonth: Date) => eachDayOfInterval({
-    start: showDaysOutOfMonth ? startOfWeek(firstDayOfMonth) : firstDayOfMonth,
-    end: showDaysOutOfMonth ? endOfWeek(endOfMonth(firstDayOfMonth)) : endOfMonth(firstDayOfMonth),
-  });
+  const daysOfMonth = (firstDayOfMonth: Date) =>
+    eachDayOfInterval({
+      start: showDaysOutOfMonth
+        ? startOfWeek(firstDayOfMonth)
+        : firstDayOfMonth,
+      end: showDaysOutOfMonth
+        ? endOfWeek(endOfMonth(firstDayOfMonth))
+        : endOfMonth(firstDayOfMonth),
+    });
 
   function goToCurrentMonth() {
     setCurrentMonth(format(today, "MMM-yyyy"));
-    setSelectedDay(today)
+    setSelectedDay(today);
   }
 
-  function previousMonth() {
-    const firstDayPreviousMonth = add(firstDayCurrentMonth, { months: -1 });
-    setCurrentMonth(format(firstDayPreviousMonth, "MMM-yyyy"));
-  }
-
-  function nextMonth() {
-    const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
-    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
-  }
-  function getFirstDayPrevMonth() {
+  function getFirstDayPrevMonth(): Date {
     const firstDayPreviousMonth = add(firstDayCurrentMonth, { months: -1 });
     return firstDayPreviousMonth;
   }
 
-  function getFirstDayNextMonth() {
+  function getFirstDayNextMonth(): Date {
     const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     return firstDayNextMonth;
   }
 
-  const getDayEvents = (day: Date) => (sampleEvents.filter((event) => isSameDay(event.due, day)));
+  function previousMonth() {
+    setCurrentMonth(format(getFirstDayPrevMonth(), "MMM-yyyy"));
+  }
+
+  function nextMonth() {
+    setCurrentMonth(format(getFirstDayNextMonth(), "MMM-yyyy"));
+  }
+
+  // TODO swap sample events
+  const getDayEvents = (day: Date) =>
+    sampleEvents.filter((event) =>
+      isSameDay(parseISO(event.due as string), day)
+    );
 
   return (
     <div className="max-w-xl w-[40rem] md:px-4 md:py-4 select-none lg:text-2xl md:text-xl font-light">
@@ -75,35 +80,37 @@ export default function Calendar({ }: Props) {
             firstDayCurrentMonth={firstDayCurrentMonth}
             goToCurrentMonth={goToCurrentMonth}
             previousMonth={previousMonth}
-            nextMonth={nextMonth} />
+            nextMonth={nextMonth}
+          />
 
           {/* === Headers for Days === */}
           <div className="grid grid-cols-7 mt-5 text-lg leading-8 text-center font-normal text-gray-500 cursor-default">
-            <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+            <div>S</div>
+            <div>M</div>
+            <div>T</div>
+            <div>W</div>
+            <div>T</div>
+            <div>F</div>
+            <div>S</div>
           </div>
         </div>
       </div>
 
       {/* Calendar */}
       <div className="grid grid-cols-1 divide-x-2 divide-gray-500 divi mb-4">
-
         {/* === Days === */}
         <div className="grid grid-cols-7 mt-0 text-md">
-          {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => {
-            console.log(getDayEvents(day));
-            return (
-              <CalendarDay
-                key={dayIndx}
-                day={day}
-                dayIndx={dayIndx}
-                firstDayOfMonth={firstDayCurrentMonth}
-                dayEvents={getDayEvents(day)} />
-            )
-          })}
+          {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
+            <CalendarDay
+              key={day.toISOString()}
+              day={day}
+              dayIndx={dayIndx}
+              firstDayOfMonth={firstDayCurrentMonth}
+              dayEvents={getDayEvents(day)}
+            />
+          ))}
         </div>
-
       </div>
     </div>
   );
 }
-

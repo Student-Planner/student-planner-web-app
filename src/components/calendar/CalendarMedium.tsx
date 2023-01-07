@@ -17,6 +17,7 @@ import CalendarHeader from './CalendarHeader';
 import { MonthEvents, SelectedDay } from '../../pages/_app';
 import { Event } from "@prisma/client";
 import { GetServerSideProps } from "next";
+import sampleEvents from '../../data/sampleEvents';
 
 
 type Props = {}
@@ -62,7 +63,8 @@ export default function CalendarMedium({ }: Props) {
     return firstDayNextMonth;
   }
 
-  const getDayEvents = (day: Date) => (monthEvents.filter((event) => isSameDay(event.due, day)));
+  // TODO swap sample events
+  const getDayEvents = (day: Date) => (sampleEvents.filter((event) => isSameDay(parseISO(event.due as string), day)));
 
   return (
     <div className="max-w-lg w-[30rem] md:px-4 md:py-4 select-none lg:text-xl md:text-lg">
@@ -90,7 +92,7 @@ export default function CalendarMedium({ }: Props) {
         <div className="grid grid-cols-7 mt-0 text-md">
           {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
             <CalendarDay
-              key={day.toString()}
+              key={day.toISOString()}
               day={day}
               dayIndx={dayIndx}
               firstDayOfMonth={firstDayCurrentMonth}

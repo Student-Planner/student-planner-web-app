@@ -87,12 +87,12 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
 
             <div className="flex flex-row mt-1 h-3 text-base justify-center">
                 {dayEvents.map((event, eventIndex) => (
-                    eventIndex < 3 ? <div
-                        key={event.id}
-                        className={classNames(
-                            eventIndex === 0 ?
-                                "" : "ml-1.5",
-                            "bg-[" + event.color + "]", "h-2 w-2 rounded-full")}></div> : <></>
+                    (eventIndex < 3) &&
+                    <div key={event.id} className={classNames(
+                        eventIndex === 0 ? "" : "ml-1.5",
+                        "bg-[" + event.color + "]", "h-2 w-2 rounded-full")}>
+
+                    </div>
                 ))}
             </div>
         </div>
