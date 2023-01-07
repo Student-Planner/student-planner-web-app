@@ -13,6 +13,7 @@ import { selectedDayValue, changeSelectedDay } from '../../../lib/redux/calendar
 import { SelectedDay } from '../../pages/_app';
 import { Event } from '@prisma/client';
 import { concatenate } from '../../utils/utils';
+import ColoredDiv from './ColoredDiv';
 
 type Props = {
     day: Date;
@@ -89,9 +90,9 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
             <div className="flex flex-row mt-1 h-3 text-base justify-center">
                 {dayEvents.map((event, eventIndex) => (
                     (eventIndex < 3) &&
-                    <div key={event.id} className={`${eventIndex === 0 ? "" : "ml-1.5"} bg-[${event.color}] h-2 w-2 rounded-full`}>
+                    <div key={event.id} style={{ backgroundColor: event.color }} className={`${eventIndex === 0 ? "" : "ml-1.5"} h-2 w-2 rounded-full`}></div>
+                    // <ColoredDiv key={event.id} classes={`${eventIndex === 0 ? "" : "ml-1.5"} h-2 w-2 rounded-full`} event={event} />
 
-                    </div>
                 ))}
             </div>
         </div>
