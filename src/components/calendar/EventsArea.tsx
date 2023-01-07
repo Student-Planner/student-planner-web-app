@@ -10,16 +10,13 @@ type Props = {};
 function EventsArea({ }: Props) {
     const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer();
     const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
-    const [dayEvents, setDayEvents] = useState<Event[]>([]);
+    const [selectedDayEvents, setSelectedDayEvents] = useState<Event[]>([]);
 
     // TODO swap sample events
-    const getDayEvents = (day: Date) =>
-        sampleEvents.filter((event) =>
-            isSameDay(event.due, day)
-        );
+    const getDayEvents = (day: Date) => sampleEvents.filter((event) => isSameDay(event.due, day));
 
     useEffect(() => {
-        setDayEvents(getDayEvents(selectedDayValue));
+        setSelectedDayEvents(getDayEvents(selectedDayValue));
     }, [selectedDayValue]);
 
     return (
@@ -33,8 +30,8 @@ function EventsArea({ }: Props) {
             {/* Events Portion */}
             <section className="">
                 <ol className="flex flex-col gap-2 mt-5 text-sm leading-6">
-                    {dayEvents.length > 0 ? (
-                        dayEvents.map((event) => (
+                    {selectedDayEvents.length > 0 ? (
+                        selectedDayEvents.map((event) => (
                             <EventItem key={event.id} event={event} />
                         ))
                     ) : (
