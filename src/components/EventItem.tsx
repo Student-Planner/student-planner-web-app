@@ -10,15 +10,17 @@ type Props = {
 {/* Checkbox button */ }
 function EventItem({ event }: Props) {
     return (
-        <button className='rounded-lg ring-gray-600 ring-2 ring-solid hover:bg-gray-700 container w-full max-h-28 my-1 ' role="checkbox" type='button' aria-checked>
+        <button className='hover:bg-neutral-700 container w-full max-h-16 my-1 mx-0 outline outline-2 px-4 py-4 rounded-xl outline-neutral-700 transition-colors duration-150 shadow-md hover:shadow-lg' role="checkbox" type='button' aria-checked>
 
             {/* Event content */}
             <div className="pl-2">
+                {/* {"Math Study 11.6"} */}
                 {event.title}
             </div>
 
             {/* Event Description */}
             <p className="m-2 max-h-4 max-w-full text-xs truncate">
+                {/* {"Slides on G-Drive, also from kuhaili"} */}
                 {event.description}
             </p>
 

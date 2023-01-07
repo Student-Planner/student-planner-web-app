@@ -12,12 +12,12 @@ import {
   parseISO,
   startOfToday,
 } from "date-fns";
-import sampleTasks from '@/data/sampleEvents';
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from './CalendarHeader';
 import { MonthEvents, SelectedDay } from '../../pages/_app';
 import { Event } from "@prisma/client";
 import { GetServerSideProps } from "next";
+import sampleEvents from '../../data/sampleEvents'
 
 
 type Props = {}
@@ -63,7 +63,7 @@ export default function Calendar({ }: Props) {
     return firstDayNextMonth;
   }
 
-  const getDayEvents = (day: Date) => (monthEvents.filter((event) => isSameDay(event.due, day)));
+  const getDayEvents = (day: Date) => (sampleEvents.filter((event) => isSameDay(event.due, day)));
 
   return (
     <div className="max-w-xl w-[40rem] md:px-4 md:py-4 select-none lg:text-2xl md:text-xl font-light">
@@ -89,14 +89,17 @@ export default function Calendar({ }: Props) {
 
         {/* === Days === */}
         <div className="grid grid-cols-7 mt-0 text-md">
-          {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
-            <CalendarDay
-              key={day.toString()}
-              day={day}
-              dayIndx={dayIndx}
-              firstDayOfMonth={firstDayCurrentMonth}
-              dayEvents={getDayEvents(day)} />
-          ))}
+          {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => {
+            console.log(getDayEvents(day));
+            return (
+              <CalendarDay
+                key={dayIndx}
+                day={day}
+                dayIndx={dayIndx}
+                firstDayOfMonth={firstDayCurrentMonth}
+                dayEvents={getDayEvents(day)} />
+            )
+          })}
         </div>
 
       </div>

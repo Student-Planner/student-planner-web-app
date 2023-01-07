@@ -22,9 +22,6 @@ type Props = {
 
 
 const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
-    // const dispatch = useDispatch()
-    // const selectedDay = useSelector(selectedDayValue)
-    // const setSelectedDay = (day: Date) => dispatch(changeSelectedDay(day))
     const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
 
     return (
@@ -88,27 +85,16 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                 </time>
             </button>
 
-            <div className="flex flex-row mt-0.5 h-1.5 text-xs justify-center">
+            <div className="flex flex-row mt-1 h-3 text-base justify-center">
                 {dayEvents.map((event, eventIndex) => (
                     eventIndex < 3 ? <div
-                        key={eventIndex}
-                        // TODO update color value (was bg-red-600)
+                        key={event.id}
                         className={classNames(
                             eventIndex === 0 ?
-                                "" : "ml-1",
-                            "bg-[", event.color, "]", "h-1.5 w-1.5 rounded-full")}></div> : <></>
+                                "" : "ml-1.5",
+                            "bg-[" + event.color + "]", "h-2 w-2 rounded-full")}></div> : <></>
                 ))}
             </div>
-            {/* <div className="w-1 h-1 mx-auto mt-1">
-                {sampleMeetings.some((meeting) =>
-                    isSameDay(
-                        parseISO(meeting.startDatetime),
-                        day
-                    )
-                ) && (
-                        <div className="w-1 h-1 rounded-full bg-sky-500"></div>
-                    )}
-            </div> */}
         </div>
     )
 }
