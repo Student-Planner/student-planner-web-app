@@ -67,7 +67,7 @@ export default function Calendar({ }: Props) {
   // TODO swap sample events
   const getDayEvents = (day: Date) =>
     sampleEvents.filter((event) =>
-      isSameDay(parseISO(event.due as string), day)
+      isSameDay(event.due, day)
     );
 
   return (
@@ -97,9 +97,8 @@ export default function Calendar({ }: Props) {
       </div>
 
       {/* Calendar */}
-      <div className="grid grid-cols-1 divide-x-2 divide-gray-500 divi mb-4">
         {/* === Days === */}
-        <div className="grid grid-cols-7 mt-0 text-md">
+      <div className="grid grid-cols-7 mt-0 text-md mb-4">
           {daysOfMonth(firstDayCurrentMonth).map((day, dayIndx) => (
             <CalendarDay
               key={day.toISOString()}
@@ -109,7 +108,6 @@ export default function Calendar({ }: Props) {
               dayEvents={getDayEvents(day)}
             />
           ))}
-        </div>
       </div>
     </div>
   );

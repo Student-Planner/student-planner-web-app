@@ -1,10 +1,8 @@
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { classNames } from "../../utils/utils";
 
 
 type ButtonProps = {
-    icon: IconDefinition;
+    icon: React.ReactNode;
     accessTxt: string;
     clickFunction: () => void;
     prominent: boolean;
@@ -18,7 +16,7 @@ export function CalendarHeaderButton({ icon, accessTxt, clickFunction, prominent
             onClick={clickFunction}
             className={classNames(`flex flex-none items-center place-self-center justify-center mx-1.5 my-auto text-2xl hover:bg-neutral-700 h-14 w-14 rounded-full text-neutral-400`, prominent ? 'hover:text-red-500' : 'hover:text-neutral-300')}>
             <span className="sr-only">{accessTxt}</span>
-            <FontAwesomeIcon icon={icon} />
+            {icon}
         </button>
     )
 }

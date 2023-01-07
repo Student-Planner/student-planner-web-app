@@ -64,7 +64,7 @@ export default function CalendarMedium({ }: Props) {
   }
 
   // TODO swap sample events
-  const getDayEvents = (day: Date) => (sampleEvents.filter((event) => isSameDay(parseISO(event.due as string), day)));
+  const getDayEvents = (day: Date) => (sampleEvents.filter((event) => isSameDay(event.due, day)));
 
   return (
     <div className="max-w-lg w-[30rem] md:px-4 md:py-4 select-none lg:text-xl md:text-lg">

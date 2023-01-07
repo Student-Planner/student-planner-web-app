@@ -2,7 +2,7 @@ import React from "react";
 import {
     format,
 } from "date-fns";
-import { faCalendarDay, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FaCalendarDay, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { CalendarHeaderButton } from './CalendaryHeaderButton';
 
 
@@ -20,9 +20,9 @@ function CalendarHeader({ firstDayCurrentMonth, goToCurrentMonth, previousMonth,
                 {format(firstDayCurrentMonth, "MMMM yyyy")}
             </h2>
 
-            <CalendarHeaderButton icon={faCalendarDay} accessTxt='Current month' clickFunction={goToCurrentMonth} prominent={true} />
-            <CalendarHeaderButton icon={faChevronLeft} accessTxt='Previous month' clickFunction={previousMonth} prominent={false} />
-            <CalendarHeaderButton icon={faChevronRight} accessTxt='Next month' clickFunction={nextMonth} prominent={false} />
+            <CalendarHeaderButton icon={<FaCalendarDay />} accessTxt='Current month' clickFunction={goToCurrentMonth} prominent={true} />
+            <CalendarHeaderButton icon={<FaChevronLeft />} accessTxt='Previous month' clickFunction={previousMonth} prominent={false} />
+            <CalendarHeaderButton icon={<FaChevronRight />} accessTxt='Next month' clickFunction={nextMonth} prominent={false} />
 
         </div>
     )
