@@ -20,12 +20,8 @@ function EventsArea({ }: Props) {
     }, [selectedDayValue]);
 
     return (
-        <div className="flex flex-col container max-w-4xl mx-8 outline outline-2 px-4 py-4 rounded-lg outline-neutral-700 transition-colors duration-300 shadow-md hover:shadow-lg">
-            <h2 className="font-semibold text-lg px-2 text-gray-400">
-                <>Schedule for </>
-                <time dateTime={format(selectedDayValue, "yyyy-MM-dd")}>
-                    {format(selectedDayValue, "MMM dd, yyy")}
-                </time>
+        <div className="flex flex-col container max-w-5xl mx-8 outline outline-2 px-4 py-4 rounded-lg outline-neutral-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+            <h2 className="font-semibold text-lg px-2 text-gray-400"><span className="select-none">Schedule for </span><time dateTime={format(selectedDayValue, "yyyy-MM-dd")}>{format(selectedDayValue, "MMM dd, yyy")}</time>
             </h2>
             {/* Events Portion */}
             <section className="">

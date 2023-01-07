@@ -91,8 +91,6 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                 {dayEvents.map((event, eventIndex) => (
                     (eventIndex < 3) &&
                     <div key={event.id} style={{ backgroundColor: event.color }} className={`${eventIndex === 0 ? "" : "ml-1.5"} h-2 w-2 rounded-full`}></div>
-                    // <ColoredDiv key={event.id} classes={`${eventIndex === 0 ? "" : "ml-1.5"} h-2 w-2 rounded-full`} event={event} />
-
                 ))}
             </div>
         </div>
