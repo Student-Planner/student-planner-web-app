@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectedDayValue, changeSelectedDay } from '../../../lib/redux/calendarSelectedDay';
 import { SelectedDay } from '../../pages/_app';
 import { Event } from '@prisma/client';
+import { concatenate } from '../../utils/utils';
 
 type Props = {
     day: Date;
@@ -90,7 +91,7 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                     (eventIndex < 3) &&
                     <div key={event.id} className={classNames(
                         eventIndex === 0 ? "" : "ml-1.5",
-                        "bg-[" + event.color + "]", "h-2 w-2 rounded-full")}>
+                        concatenate("bg-[", event.color, "]"), "h-2 w-2 rounded-full")}>
 
                     </div>
                 ))}

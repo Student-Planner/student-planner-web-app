@@ -2,8 +2,8 @@ import { MonthEvents, SelectedDay } from "@/pages/_app";
 import { Event } from "@prisma/client";
 import { format, isSameDay, parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
-import EventItem from "../EventItem";
-import sampleEvents from '../../data/sampleEvents'
+import EventItem from "./EventItem";
+import sampleEvents from "../../data/sampleEvents";
 
 type Props = {};
 
@@ -14,7 +14,9 @@ function EventsArea({ }: Props) {
 
     // TODO swap sample events
     const getDayEvents = (day: Date) =>
-        sampleEvents.filter((event) => isSameDay(parseISO(event.due as string), day));
+        sampleEvents.filter((event) =>
+            isSameDay(event.due, day)
+        );
 
     useEffect(() => {
         setDayEvents(getDayEvents(selectedDayValue));
@@ -30,29 +32,14 @@ function EventsArea({ }: Props) {
             </h2>
             {/* Events Portion */}
             <section className="">
-                <ol className="flex flex-col mt-5 text-sm leading-6">
+                <ol className="flex flex-col gap-2 mt-5 text-sm leading-6">
                     {dayEvents.length > 0 ? (
                         dayEvents.map((event) => (
                             <EventItem key={event.id} event={event} />
-                            ))
-                            ) : (
-                                <p>No meetings for today.</p>
+                        ))
+                    ) : (
+                            <p className="ml-4 text-lg text-neutral-400">No events for today.</p>
                     )}
-                    {/* <EventItem
-                        event={{
-                            id: "id-123",
-                            title: "some title",
-                            description: "some description",
-                            due: new Date(),
-                            created: new Date(),
-                            updated: new Date(),
-                            color: "#151515",
-                            isCompleted: false,
-                            isRecurring: false,
-                            labels: ["some label"],
-                            userId: "user-123",
-                        }}
-                    /> */}
                 </ol>
             </section>
         </div>
