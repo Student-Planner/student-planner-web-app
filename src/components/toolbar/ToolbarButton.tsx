@@ -12,7 +12,7 @@ function EventItemButton({ icon, onClick, classes }: Props) {
         <button
             type="button"
             onClick={onClick}
-            className={classNames('flex flex-none items-center place-self-center justify-center my-auto h-14 w-14 rounded-md text-neutral-400 hover:text-neutral-300 hover:bg-neutral-600', classes)}>
+            className={classNames('flex flex-none items-center justify-center mx-auto h-14 w-14 duration-150 rounded-md text-neutral-400 hover:text-neutral-200 hover:bg-neutral-600', classes)}>
             {icon}
         </button>
     )
