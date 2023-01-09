@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   add,
   eachDayOfInterval,
@@ -8,14 +8,11 @@ import {
   format,
   isSameDay,
   parse,
-  parseISO,
   startOfToday,
 } from "date-fns";
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from "./CalendarHeader";
 import { MonthEvents, SelectedDay } from "../../pages/_app";
-import { Event } from "@prisma/client";
-import { GetServerSideProps } from "next";
 import sampleEvents from "../../data/sampleEvents";
 
 type Props = {};
@@ -105,7 +102,13 @@ export default function Calendar({ }: Props) {
               day={day}
               dayIndx={dayIndx}
               firstDayOfMonth={firstDayCurrentMonth}
-              dayEvents={getDayEvents(day)}
+              dayEvents={getDayEvents(day)} 
+              magnetProps={{
+                speed: 0.5,
+                scale: 1.5,
+                tollerance: 0.5,
+                borderRadius: '30px',
+              }}              
             />
           ))}
       </div>

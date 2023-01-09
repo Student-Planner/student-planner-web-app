@@ -96,7 +96,13 @@ export default function CalendarMedium({ }: Props) {
               day={day}
               dayIndx={dayIndx}
               firstDayOfMonth={firstDayCurrentMonth}
-              dayEvents={getDayEvents(day)} />
+              dayEvents={getDayEvents(day)}
+              magnetProps={{
+                speed: 0.5,
+                scale: 1.5,
+                tollerance: 0.5,
+                borderRadius: '30px',
+              }} />
           ))}
         </div>
 

@@ -1,30 +1,104 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
     format,
     getDay,
     isEqual,
     isSameMonth,
     isToday,
-    startOfToday,
 } from "date-fns";
 import { classNames } from '@/utils/utils';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectedDayValue, changeSelectedDay } from '../../../lib/redux/calendarSelectedDay';
 import { SelectedDay } from '../../pages/_app';
 import { Event } from '@prisma/client';
-import { concatenate } from '../../utils/utils';
-import ColoredDiv from './ColoredDiv';
+import gsap from 'gsap'
+
+
+
 
 type Props = {
     day: Date;
     dayIndx: number;
     firstDayOfMonth: Date;
     dayEvents: Event[];
+    magnetProps: any;
 }
 
 
-const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
+const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents, magnetProps: { children,
+    className,
+    props,
+    speed = 1,
+    tollerance = 0.8,
+    scale = 1.2,
+    borderRadius = 0,
+    debug = false, } }: Props) => {
     const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
+
+    const $root = useRef(null)
+    const $item = useRef(null)
+    const $hover = useRef(null)
+    const rootBound = useRef(null)
+    const itemBound = useRef(null)
+    const diffBound = useRef({ x: 0, y: 0 })
+
+    const handleMouseEnter = () => {
+        if (!$root.current || !$item.current) return
+        gsap.killTweensOf($item.current)
+        gsap.set($hover.current, {
+            scale: scale,
+            borderRadius,
+            background: debug ? 'rgba(0, 125, 255, .4)' : 'transparent',
+        })
+
+        rootBound.current = $root.current.getBoundingClientRect()
+        itemBound.current = $item.current.getBoundingClientRect()
+        diffBound.current.x = (rootBound.current.width * scale - rootBound.current.width) / 2
+        diffBound.current.y = (rootBound.current.height * scale - rootBound.current.height) / 2
+    }
+
+    const handleMouseLeave = () => {
+        gsap.killTweensOf($item.current)
+        gsap.to($item.current, {
+            x: 0,
+            y: 0,
+            ease: 'elastic.out(1.1, .4)',
+            duration: 1.2
+        })
+        gsap.set($hover.current, {
+            scale: 1
+        })
+    }
+
+    const handleMouseMove = (e) => {
+        const x = e.clientX || e.touches[0].clientX
+        const y = e.clientY || e.touches[0].clientY
+
+        const maxX = (rootBound.current.width - itemBound.current.width) / 2 * tollerance
+        const maxY = (rootBound.current.height - itemBound.current.height) / 2 * tollerance
+
+        const newX = gsap.utils.mapRange(
+            0,
+            rootBound.current.width * scale,
+            -maxX,
+            maxX,
+            x - rootBound.current.x + diffBound.current.x
+        )
+
+        const newY = gsap.utils.mapRange(
+            0,
+            rootBound.current.height * scale,
+            -maxY,
+            maxY,
+            y - rootBound.current.y + diffBound.current.y
+        )
+
+        gsap.killTweensOf($item.current)
+        gsap.to($item.current, {
+            x: newX,
+            y: newY,
+            ease: 'power3.out',
+            duration: speed
+        })
+    }
 
     return (
         <div
@@ -32,13 +106,24 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
             className={classNames(
                 dayIndx === 0 &&
                 colStartClasses[getDay(day)],
-                "mt-4 px-auto"
+                "mt-4"
             )}>
+
+
             <button
+                ref={$root}
+                onMouseEnter={handleMouseEnter}
+                onMouseMove={handleMouseMove}
+                onTouchMove={handleMouseMove}
+                onTouchStart={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onTouchEnd={handleMouseLeave}
+
                 type="button"
                 onClick={() => setSelectedDay(day)}
                 className={classNames(
-                    // == Common Day in Month == 
+                    'magnetic-button cursor-pointer relative z-1 touch-none ', className + ' ',
+                    // == Common Day in Month ==
 
                     // When NOT Selected
                     !isEqual(day, selectedDayValue) &&
@@ -82,9 +167,14 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                     // Other common styles
                     'mx-auto flex h-16 w-16 items-center justify-center rounded-full transition-all duration-100'
                 )}>
-                <time dateTime={format(day, "yyyy-MM-dd")}>
-                    {format(day, "d")}
-                </time>
+
+
+                <span ref={$item} className="magnetic-button--item inline-block">
+                    <time dateTime={format(day, "yyyy-MM-dd")}>
+                        {format(day, "d")}
+                    </time>
+                </span>
+                <span className="magnetic-button--hover inline-block absolute z-minus-1 top-0 left-0 h-full w-full" ref={$hover} />
             </button>
 
             <div className="flex flex-row mt-1 h-3 text-base justify-center">
@@ -94,6 +184,7 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents }: Props) => {
                 ))}
             </div>
         </div>
+
     )
 }
 
