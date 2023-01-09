@@ -4,6 +4,7 @@ import { format, isSameDay, isToday, parseISO, startOfToday } from "date-fns";
 import React, { useEffect, useState } from "react";
 import EventItem from "./EventItem";
 import sampleEvents from "../../data/sampleEvents";
+import CreateEventPopup from '../popups/CreateEvent';
 
 type Props = {};
 
@@ -39,7 +40,7 @@ function EventsArea({ }: Props) {
             <h2 className="font-semibold text-lg px-2 text-gray-400"><span>Schedule for</span><time dateTime={format(selectedDayValue, "yyyy-MM-dd")}><button className={`bg-transparent hover:bg-neutral-800 hover:shadow-lg rounded-lg px-1.5 py-0.5 ${isToday(selectedDayValue) ? "text-red-500" : ""}`} onClick={copyText}>{format(selectedDayValue, "MMM dd, yyy")}</button></time>
             </h2>
             {/* Events Portion */}
-            <section className="">
+            <div className="content h-full flex flex-col justify-between">
                 <ol className="flex flex-col gap-2 mt-5 text-sm leading-6">
                     {selectedDayEvents.length > 0 ? (
                         selectedDayEvents.map((event) => (
@@ -49,7 +50,13 @@ function EventsArea({ }: Props) {
                             <p className="ml-4 text-lg text-neutral-400">No events for today.</p>
                     )}
                 </ol>
-            </section>
+
+                <div className="create-event-popup-area">
+
+                    <CreateEventPopup />
+                </div>
+            </div>
+
         </div>
     );
 }
