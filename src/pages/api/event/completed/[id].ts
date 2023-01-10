@@ -1,5 +1,5 @@
 // pages/api/completed/[id].ts
-import prisma from '../../../../../lib/prismadb'
+import prisma from '@/utils/prismadb'
 
 // PUT /api/completed/:id
 export default async function handle(req, res) {

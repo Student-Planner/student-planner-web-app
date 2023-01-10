@@ -8,7 +8,8 @@ import Calendar from "@/components/calendar/Calendar";
 import Toolbar from '../components/toolbar/Toolbar';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useSession, getSession } from 'next-auth/react';
-import prisma from '../../lib/prismadb'
+import prisma from '@/utils/prismadb'
+import { trpc } from "@/utils/trpc";
 import { MonthEvents } from './_app';
 import {
     startOfMonth,
@@ -18,18 +19,17 @@ import {
     endOfWeek,
 } from "date-fns";
 
-type Props = {
-    events: Event[];
-};
 
-export default function Home({ monthEvents: requestMonthEvents }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const { data: session, status } = useSession();
     const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
+
 
     useEffect(() => {
         if ((!(status === "authenticated") || !session)) {
             Router.push("/login");
         }
+        const monthEvents = trpc.events.useQuery({ firstDayOfMonth: startOfMonth(startOfToday()) });
         setMonthEvents(requestMonthEvents.map((event: Event) => ({
             ...event,
             due: new Date(event.due),
@@ -40,6 +40,9 @@ export default function Home({ monthEvents: requestMonthEvents }: InferGetServer
         console.log('These are the events for the month ', monthEvents)
     }, [status, session]);
 
+    if (!monthEvents) {
+        return <div>Loading...</div>;
+    }
     return (
         <>
             <Head>
@@ -64,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
     const monthEvents = await prisma.event.findMany({
         where: {
-            User: { email: session.user.email },
+            User: { email: session.user?.email },
             AND: [{ due: { gte: startOfWeek(startOfMonth(startOfToday())) } }, { due: { lte: endOfWeek(endOfMonth(startOfToday())) } }]
         },
         orderBy: [{ due: 'asc' },],

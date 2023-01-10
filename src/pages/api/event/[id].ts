@@ -1,5 +1,5 @@
 // pages/api/event/[id].ts
-import prisma from '../../../../lib/prismadb'
+import prisma from '@/utils/prismadb'
 
 // DELETE /api/event/:id
 export default async function handle(req, res) {

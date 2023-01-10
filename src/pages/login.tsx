@@ -15,7 +15,7 @@ export default function Login({ }) {
     const { data: session, status } = useSession();
     const [submitLoading, setSubmitLoading] = useState(false);
 
-    function loginUser(e): void {
+    function loginUser(e: any): void {
         // TODO login the user with credentials and disable submit if everything is valid
         // setClickedSubmit(true);
     }

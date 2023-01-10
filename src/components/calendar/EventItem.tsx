@@ -24,7 +24,7 @@ function EventItem({ event }: Props) {
         throw new Error('Function not implemented.');
     }
 
-    function onEventClick(e): void {
+    function onEventClick(e: any): void {
         throw new Error('Function not implemented.');
     }
 
