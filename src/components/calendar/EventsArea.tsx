@@ -1,24 +1,24 @@
-import { MonthEvents, SelectedDay } from "@/pages/_app";
+import { CreatingEvent, MonthEvents, SelectedDay } from "@/pages/_app";
 import { Event } from "@prisma/client";
 import { format, isSameDay, isToday, parseISO, startOfToday } from "date-fns";
 import React, { useEffect, useState } from "react";
 import EventItem from "./EventItem";
-import sampleEvents from "../../data/sampleEvents";
-import CreateEventPopup from '../popups/CreateEvent';
+import CreateEventModule from '../popups/CreateEventModule';
 
 type Props = {};
 
 function EventsArea({ }: Props) {
     const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer();
     const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
+    const { creatingEvent, setCreatingEvent } = CreatingEvent.useContainer();
     const [selectedDayEvents, setSelectedDayEvents] = useState<Event[]>([]);
 
-    // TODO swap sample events
-    const getDayEvents = (day: Date) => sampleEvents.filter((event) => isSameDay(event.due, day));
+    const getDayEvents = (day: Date) => monthEvents.filter((event) => isSameDay(event.due, day));
 
     useEffect(() => {
+        console.log('render triggered')
         setSelectedDayEvents(getDayEvents(selectedDayValue));
-    }, [selectedDayValue]);
+    }, [selectedDayValue, monthEvents]);
 
     const copyText = async (e) => {
         const anchor = e.target as HTMLButtonElement
@@ -52,8 +52,7 @@ function EventsArea({ }: Props) {
                 </ol>
 
                 <div className="create-event-popup-area">
-
-                    <CreateEventPopup />
+                    {creatingEvent && <CreateEventModule />}
                 </div>
             </div>
 

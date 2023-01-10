@@ -2,12 +2,15 @@ import React from 'react'
 import ToolbarButton from './ToolbarButton'
 import { BsPlusLg } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
+import CreateEventModule from '../popups/CreateEventModule';
+import { CreatingEvent } from '../../pages/_app';
 
 type Props = {}
 
 function Toolbar({ }: Props) {
+    const { creatingEvent, setCreatingEvent } = CreatingEvent.useContainer();
     function addEvent(e: any): void {
-        throw new Error('Function not implemented.');
+        setCreatingEvent(!creatingEvent);
     }
     function deleteEvent(e: any): void {
         throw new Error('Function not implemented.');

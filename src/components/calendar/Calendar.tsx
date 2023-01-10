@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   add,
   eachDayOfInterval,
@@ -13,7 +13,6 @@ import {
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from "./CalendarHeader";
 import { MonthEvents, SelectedDay } from "../../pages/_app";
-import sampleEvents from "../../data/sampleEvents";
 
 type Props = {};
 
@@ -61,11 +60,13 @@ export default function Calendar({ }: Props) {
     setCurrentMonth(format(getFirstDayNextMonth(), "MMM-yyyy"));
   }
 
-  // TODO swap sample events
-  const getDayEvents = (day: Date) =>
-    sampleEvents.filter((event) =>
-      isSameDay(event.due, day)
-    );
+  // TODO stop this from recalculating for every re-render, useMemo or useCallback, maybe put on every day
+  const getDayEvents = (day: Date) => monthEvents.filter((event) => isSameDay(event.due, day));
+
+  // TODO TEMP
+  useEffect(() => {
+    console.log('render triggered')
+  }, [monthEvents]);
 
   return (
     <div className="max-w-xl w-[40rem] md:px-4 md:py-4 select-none lg:text-2xl md:text-xl font-light">

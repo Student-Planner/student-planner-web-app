@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
     format,
     getDay,
@@ -7,11 +7,9 @@ import {
     isToday,
 } from "date-fns";
 import { classNames } from '@/utils/utils';
-import { SelectedDay } from '../../pages/_app';
+import { MonthEvents, SelectedDay } from '../../pages/_app';
 import { Event } from '@prisma/client';
 import gsap from 'gsap'
-
-
 
 
 type Props = {
@@ -167,8 +165,6 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents, magnetProps: { 
                     // Other common styles
                     'mx-auto flex h-16 w-16 items-center justify-center rounded-full transition-all duration-100'
                 )}>
-
-
                 <span ref={$item} className="magnetic-button--item inline-block">
                     <time dateTime={format(day, "yyyy-MM-dd")}>
                         {format(day, "d")}

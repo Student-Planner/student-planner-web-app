@@ -9,6 +9,7 @@ import { useState } from "react";
 import { startOfToday } from "date-fns";
 import Head from "next/head";
 import { Event } from "@prisma/client";
+import { trpc } from '../utils/trpc'
 
 function useSelectedDay(initialState: Date) {
   const [selectedDay, setSelectedDay] = useState(initialState);
@@ -20,13 +21,20 @@ function useMonthEvents(initialState: Event[]) {
   return { monthEvents, setMonthEvents };
 }
 
+function useCreatingEvent(initialState: boolean) {
+  const [creatingEvent, setCreatingEvent] = useState(initialState);
+  return { creatingEvent, setCreatingEvent };
+}
+
 export const SelectedDay = createContainer(useSelectedDay);
 export const MonthEvents = createContainer(useMonthEvents);
+export const CreatingEvent = createContainer(useCreatingEvent);
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SelectedDay.Provider initialState={startOfToday()}>
       <MonthEvents.Provider initialState={[]}>
+        <CreatingEvent.Provider initialState={false}>
         <SessionProvider session={session}>
           <Provider store={store}>
             <RadixTooltip.Provider>
@@ -38,6 +46,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             </RadixTooltip.Provider>
           </Provider>
         </SessionProvider>
+        </CreatingEvent.Provider>
       </MonthEvents.Provider>
     </SelectedDay.Provider>
   );

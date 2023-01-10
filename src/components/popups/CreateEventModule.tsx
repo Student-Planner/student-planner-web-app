@@ -1,21 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineEnter } from 'react-icons/ai'
-import { SelectedDay } from '@/pages/_app';
+import { CreatingEvent, MonthEvents, SelectedDay } from '@/pages/_app';
 import { BlockPicker, SketchPicker, TwitterPicker } from "@hello-pangea/color-picker";
 import * as Popover from '@radix-ui/react-popover';
+import { Event } from '@prisma/client';
+import Router from "next/router";
+
+import { styled, keyframes } from '@stitches/react';
+import { violet, mauve, blackA } from '@radix-ui/colors';
+import { Cross2Icon } from '@radix-ui/react-icons';
+
 
 type Props = {}
 
-function CreateEventPopup({ }: Props) {
+function CreateEventModule({ }: Props) {
     const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer();
+    const { creatingEvent, setCreatingEvent } = CreatingEvent.useContainer();
+    const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
+
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
 
 
-    function createEvent(e: any): void {
-        throw new Error('Function not implemented.');
+    async function submitCreateEvent(e: any) {
+        e.preventDefault();
+        try {
+            const reqBody = {
+                title: title, description: description, due: selectedDayValue,
+                color: "#e44645", labels: []
+            }
+            const res = await fetch('/api/event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reqBody),
+            }).then((promiseResponse) => {
+                return promiseResponse.json();
+            }).then((jsonResponse) => {
+                return jsonResponse.result as Event;
+            });
+            setMonthEvents([...monthEvents, { ...res }]);
+        } catch (error) {
+            console.error(error);
+        }
+        setCreatingEvent(false)
     }
 
     function pickColor(e: any): void {
-        // throw new Error('Function not implemented.');
+        throw new Error('Function not implemented.');
     }
 
     return (
@@ -27,14 +58,18 @@ function CreateEventPopup({ }: Props) {
             </div>
 
             <div className="fields w-full flex flex-col gap-2 divide-y-2 divide-neutral-700">
-                <TextField classes="text-2xl" id="title-field" placeholder="Task Name" />
-                <TextField classes="text-lg" id="description-field" placeholder="Description" />
+                <TextField
+                    className="text-2xl" id="title-field" placeholder="Task Name"
+                    onChange={(e) => setTitle(e.target.value)} value={title} />
+                <TextField
+                    className="text-lg" id="description-field" placeholder="Description"
+                    onChange={(e) => setDescription(e.target.value)} value={description} />
             </div>
 
             <div className='submit flex-grow-0 flex-shrink-0 w-12 h-auto'>
                 <button
                     type="button"
-                    onClick={createEvent}
+                    onClick={submitCreateEvent}
                     className='flex flex-none items-center justify-center text-3xl mx-auto my-auto h-full w-full duration-150 rounded-md text-white hover:text-neutral-200 hover:bg-red-700 bg-red-500 scale-x-[-1]'>
                     {<AiOutlineEnter />}
                 </button>
@@ -43,16 +78,12 @@ function CreateEventPopup({ }: Props) {
     )
 }
 
-export default CreateEventPopup
+export default CreateEventModule
 
-function TextField({ classes, id, placeholder }) {
-    return <input className={"bg-transparent py-2 px-2 outline-none  " + classes} autoCorrect="on" spellCheck="true" type="text" id={id} placeholder={placeholder} />;
+function TextField({ className, ...props }) {
+    return <input className={`bg-transparent py-2 px-2 outline-none ${className}`} autoCorrect="on" spellCheck="true" type="text" {...props} />;
 }
 
-
-import { styled, keyframes } from '@stitches/react';
-import { violet, mauve, blackA } from '@radix-ui/colors';
-import { MixerHorizontalIcon, Cross2Icon } from '@radix-ui/react-icons';
 
 const ColorPicker = ({ pickColor }) => (
     <Popover.Root>
@@ -63,25 +94,7 @@ const ColorPicker = ({ pickColor }) => (
         </Popover.Trigger>
         <Popover.Portal>
             <PopoverContent sideOffset={5}>
-                <div className="flex flex-col gap-10">
-                    <p className='mb-10'>Dimensions</p>
-                    <fieldset>
-                        <label htmlFor="width">Width</label>
-                        <input id="width" defaultValue="100%" />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="maxWidth">Max. width</label>
-                        <input id="maxWidth" defaultValue="300px" />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="height">Height</label>
-                        <input id="height" defaultValue="25px" />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="maxHeight">Max. height</label>
-                        <input id="maxHeight" defaultValue="none" />
-                    </fieldset>
-                </div>
+                <BlockPicker />
                 <PopoverClose aria-label="Close">
                     <Cross2Icon />
                 </PopoverClose>
@@ -208,3 +221,4 @@ const Text = styled('p', {
     lineHeight: '19px',
     fontWeight: 500,
 });
+
