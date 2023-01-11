@@ -9,9 +9,9 @@ type Props = {};
 
 function EventsArea({ }: Props) {
     const [selectedDayEvents, setSelectedDayEvents] = useState<Event[]>([]);
-    const { selectedDay, setSelectedDay } = useSelectedDay()
-    const { creatingEvent, setCreatingEvent } = useCreatingEvent()
-    const { monthEvents, setMonthEvents } = useMonthEvents()
+    const { selectedDay } = useSelectedDay()
+    const { creatingEvent } = useCreatingEvent()
+    const { monthEvents } = useMonthEvents()
 
 
     const getDayEvents = (day: Date) => monthEvents.filter((event) => isSameDay(event.due, day));

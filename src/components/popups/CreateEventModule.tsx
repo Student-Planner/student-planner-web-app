@@ -26,7 +26,8 @@ function CreateEventModule({ }: Props) {
     async function submitCreateEvent(e: any) {
         e.preventDefault();
         try {
-            const res = await fetch('/api/event', {
+            console.log('Creating', monthEvents);
+            await fetch('/api/event', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -36,9 +37,14 @@ function CreateEventModule({ }: Props) {
             }).then((promiseResponse) => {
                 return promiseResponse.json();
             }).then((jsonResponse) => {
-                return jsonResponse.result as Event;
+                const res = jsonResponse.result as Event;
+                res.due = new Date(res.due)
+                res.created = new Date(res.created)
+                res.updated = new Date(res.updated)
+                setMonthEvents([...monthEvents, res]);
+                setTitle('')
+                setDescription('')
             });
-            setMonthEvents([...monthEvents, res]);
         } catch (error) {
             console.error(error);
         }

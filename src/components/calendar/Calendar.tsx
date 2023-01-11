@@ -12,12 +12,13 @@ import {
 } from "date-fns";
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from "./CalendarHeader";
-import { useMonthEvents, useSelectedDay } from '../../utils/zustand';
+import { useMonthEvents, useSelectedDay, useDisplayedMonth } from '../../utils/zustand';
 
 type Props = {};
 
 export default function Calendar({ }: Props) {
   const today = startOfToday();
+  const { displayedMonth, setDisplayedMonth } = useDisplayedMonth()
   const { monthEvents, setMonthEvents } = useMonthEvents()
   const { selectedDay, setSelectedDay } = useSelectedDay()
 
@@ -61,11 +62,10 @@ export default function Calendar({ }: Props) {
   }
 
   // TODO stop this from recalculating for every re-render, useMemo or useCallback, maybe put on every day
-  const getDayEvents = (day: Date) => monthEvents.filter((event) => isSameDay(event.due, day));
+  const getDayEvents = (day: Date) => monthEvents.filter((event) => isSameDay(event.due as Date, day));
 
-  // TODO TEMP
   useEffect(() => {
-    console.log('Calendar (Re-Render Triggered)')
+
   }, [monthEvents]);
 
   return (

@@ -32,6 +32,16 @@ export const useSelectedDay = create<SelectedDayState>((set) => ({
     setSelectedDay: (newSelectedDay: Date) => set((state) => ({ selectedDay: newSelectedDay })),
 }))
 
+type DisplayedMonthState = {
+    displayedMonth: Date;
+    setDisplayedMonth: (newDisplayedMonth: Date) => void;
+}
+
+export const useDisplayedMonth = create<DisplayedMonthState>((set) => ({
+    displayedMonth: startOfToday(),
+    setDisplayedMonth: (newDisplayedMonth: Date) => set((state) => ({ displayedMonth: newDisplayedMonth })),
+}))
+
 type SelectedEventState = {
     selectedEvent: Event;
     setSelectedEvent: (newSelectedEvent: Event) => void;
