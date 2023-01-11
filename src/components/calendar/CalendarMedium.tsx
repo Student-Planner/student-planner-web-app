@@ -14,18 +14,18 @@ import {
 } from "date-fns";
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from './CalendarHeader';
-import { MonthEvents, SelectedDay } from '../../pages/_app';
 import { Event } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import sampleEvents from '../../data/sampleEvents';
+import { useMonthEvents, useSelectedDay } from "@/utils/zustand";
 
 
 type Props = {}
 
 export default function CalendarMedium({ }: Props) {
   const today = startOfToday();
-  const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
-  const { monthEvents, setMonthEvents } = MonthEvents.useContainer()
+  const { monthEvents, setMonthEvents } = useMonthEvents()
+  const { selectedDay, setSelectedDay } = useSelectedDay()
 
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());

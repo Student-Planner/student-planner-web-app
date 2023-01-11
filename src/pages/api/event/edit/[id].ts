@@ -1,5 +1,5 @@
 // pages/api/edit/[id].ts
-import prisma from '../../../../../lib/prismadb'
+import prisma from '@/utils/prismadb';
 
 // PUT /api/edit/:id
 export default async function handle(req, res) {

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineEnter } from 'react-icons/ai'
-import { CreatingEvent, MonthEvents, SelectedDay } from '@/pages/_app';
+import { useCreatingEvent, useMonthEvents, useSelectedDay } from '@/utils/zustand';
 import { BlockPicker, SketchPicker, TwitterPicker } from "@hello-pangea/color-picker";
 import * as Popover from '@radix-ui/react-popover';
 import { Event } from '@prisma/client';
@@ -14,9 +14,10 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 type Props = {}
 
 function CreateEventModule({ }: Props) {
-    const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer();
-    const { creatingEvent, setCreatingEvent } = CreatingEvent.useContainer();
-    const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
+    const { selectedDay, setSelectedDay } = useSelectedDay()
+    const { creatingEvent, setCreatingEvent } = useCreatingEvent()
+    const { monthEvents, setMonthEvents } = useMonthEvents()
+
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -25,25 +26,29 @@ function CreateEventModule({ }: Props) {
     async function submitCreateEvent(e: any) {
         e.preventDefault();
         try {
-            const reqBody = {
-                title: title, description: description, due: selectedDayValue,
-                color: "#e44645", labels: []
-            }
             const res = await fetch('/api/event', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(reqBody),
+                body: JSON.stringify({
+                    title: title, description: description, due: selectedDay,
+                    color: "#e44645", labels: []
+                }),
             }).then((promiseResponse) => {
                 return promiseResponse.json();
             }).then((jsonResponse) => {
                 return jsonResponse.result as Event;
             });
-            setMonthEvents([...monthEvents, { ...res }]);
+            setMonthEvents([...monthEvents, res]);
         } catch (error) {
             console.error(error);
         }
         setCreatingEvent(false)
     }
+
+    useEffect(() => {
+        const titleField = document.getElementById('title-field')
+        titleField.focus();
+    }, [])
 
     function pickColor(e: any): void {
         throw new Error('Function not implemented.');

@@ -24,7 +24,7 @@
 		"**/*.tsx",
 		"tailwind.config.js",
 		"src/colors.ts",
-		"lib/redux/rootReducer",
+		"src/utils/redux/rootReducer",
 		"clear.js",
 		"test.js",
 		"createSample.js"

@@ -7,9 +7,9 @@ import {
     isToday,
 } from "date-fns";
 import { classNames } from '@/utils/utils';
-import { MonthEvents, SelectedDay } from '../../pages/_app';
 import { Event } from '@prisma/client';
 import gsap from 'gsap'
+import { useSelectedDay } from '@/utils/zustand';
 
 
 type Props = {
@@ -29,7 +29,8 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents, magnetProps: { 
     scale = 1.2,
     borderRadius = 0,
     debug = false, } }: Props) => {
-    const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer()
+    const { selectedDay, setSelectedDay } = useSelectedDay()
+
 
     const $root = useRef(null)
     const $item = useRef(null)
@@ -66,9 +67,9 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents, magnetProps: { 
         })
     }
 
-    const handleMouseMove = (e) => {
-        const x = e.clientX || e.touches[0].clientX
-        const y = e.clientY || e.touches[0].clientY
+    const handleMouseMove = (e: any) => {
+        const x: number = e.clientX || e.touches[0].clientX
+        const y: number = e.clientY || e.touches[0].clientY
 
         const maxX = (rootBound.current.width - itemBound.current.width) / 2 * tollerance
         const maxY = (rootBound.current.height - itemBound.current.height) / 2 * tollerance
@@ -124,42 +125,42 @@ const CalendarDay = ({ day, dayIndx, firstDayOfMonth, dayEvents, magnetProps: { 
                     // == Common Day in Month ==
 
                     // When NOT Selected
-                    !isEqual(day, selectedDayValue) &&
+                    !isEqual(day, selectedDay) &&
                     !isToday(day) &&
                     isSameMonth(day, firstDayOfMonth) &&
                     "text-neutral-300",
 
                     // Days of other month
-                    !isEqual(day, selectedDayValue) &&
+                    !isEqual(day, selectedDay) &&
                     !isToday(day) &&
                     !isSameMonth(day, firstDayOfMonth) &&
                     "text-neutral-500",
 
                     // When Selected
-                    isEqual(day, selectedDayValue) &&
+                    isEqual(day, selectedDay) &&
                     !isToday(day) &&
                     "bg-neutral-600",
 
                     // On Hover
-                    !isEqual(day, selectedDayValue) &&
+                    !isEqual(day, selectedDay) &&
                     "hover:bg-neutral-700",
                     // =========================
 
                     // == Today == 
 
                     // When NOT Selected
-                    !isEqual(day, selectedDayValue) &&
+                    !isEqual(day, selectedDay) &&
                     isToday(day) &&
                     "text-red-500 hover:bg-neutral-700",
 
                     // When Selected
-                    isEqual(day, selectedDayValue) &&
+                    isEqual(day, selectedDay) &&
                     isToday(day) &&
                     "bg-red-500",
                     // =========================
 
                     // Bolden Selected Day & Today 
-                    (isEqual(day, selectedDayValue) || isToday(day)) &&
+                    (isEqual(day, selectedDay) || isToday(day)) &&
                     "font-normal",
 
                     // Other common styles

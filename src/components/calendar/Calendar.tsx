@@ -12,14 +12,14 @@ import {
 } from "date-fns";
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from "./CalendarHeader";
-import { MonthEvents, SelectedDay } from "../../pages/_app";
+import { useMonthEvents, useSelectedDay } from '../../utils/zustand';
 
 type Props = {};
 
 export default function Calendar({ }: Props) {
   const today = startOfToday();
-  const { selectedDayValue, setSelectedDay } = SelectedDay.useContainer();
-  const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
+  const { monthEvents, setMonthEvents } = useMonthEvents()
+  const { selectedDay, setSelectedDay } = useSelectedDay()
 
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
@@ -65,7 +65,7 @@ export default function Calendar({ }: Props) {
 
   // TODO TEMP
   useEffect(() => {
-    console.log('render triggered')
+    console.log('Calendar (Re-Render Triggered)')
   }, [monthEvents]);
 
   return (

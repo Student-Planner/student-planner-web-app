@@ -8,8 +8,7 @@ import Calendar from "@/components/calendar/Calendar";
 import Toolbar from '../components/toolbar/Toolbar';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useSession, getSession } from 'next-auth/react';
-import prisma from '../../lib/prismadb'
-import { MonthEvents } from './_app';
+import prisma from '@/utils/prismadb';
 import {
     startOfMonth,
     startOfToday,
@@ -17,6 +16,7 @@ import {
     startOfWeek,
     endOfWeek,
 } from "date-fns";
+import { useMonthEvents } from "@/utils/zustand";
 
 type Props = {
     events: Event[];
@@ -24,7 +24,8 @@ type Props = {
 
 export default function Home({ monthEvents: requestMonthEvents }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const { data: session, status } = useSession();
-    const { monthEvents, setMonthEvents } = MonthEvents.useContainer();
+    const { monthEvents, setMonthEvents } = useMonthEvents()
+
 
     useEffect(() => {
         if ((!(status === "authenticated") || !session)) {
