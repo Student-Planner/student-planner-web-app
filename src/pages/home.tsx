@@ -60,6 +60,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const session = await getSession({ req });
     if (!session) {
         res.statusCode = 403;
+        Router.push("/login");
         return { props: { monthEvents: [] } };
     }
 
