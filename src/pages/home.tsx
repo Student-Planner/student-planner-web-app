@@ -18,9 +18,6 @@ import {
 } from "date-fns";
 import { useMonthEvents } from "@/utils/zustand";
 
-type Props = {
-    events: Event[];
-};
 
 export default function Home({ monthEvents: requestMonthEvents }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const { data: session, status } = useSession();
